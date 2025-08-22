@@ -220,8 +220,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     color: "#333",
-    marginBottom: 20,
-    marginTop: 20,
+    marginBottom: 10,
+    marginTop: 18,
     textAlign: "left",
 
     marginLeft: 24,
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     width: "47%",
     aspectRatio: 1,
     borderRadius: 20,
-    padding: 20,
+    padding: 15,
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   iconContainer: {
     marginBottom: 12,
