@@ -22,6 +22,7 @@ import {
 } from "react-native";
 
 import { DrawerActions } from "@react-navigation/native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Ionicons } from "@expo/vector-icons";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SettingsProvider, useSettings } from "../context/SettingsContext";
@@ -45,8 +46,8 @@ const languages = [
   { code: "tr", name: "Türkçe", flag: "🇹🇷" }, // Turkish (Turkey)
 ];
 const instruments = [
-  { code: "piano", name: "piano", icon: "create-outline" },
-  { code: "oud", name: "oud", icon: "create-outline" },
+  { code: "piano", name: "piano", icon: "piano" },
+  { code: "oud", name: "oud", icon: "guitar-acoustic" },
 ];
 
 function CustomDrawerContent() {
@@ -74,7 +75,7 @@ function CustomDrawerContent() {
     {
       key: "Dictations/index",
       name: state.labels.melodicDictations,
-      icon: "trending-up-outline",
+      icon: "ear-outline",
     },
     {
       key: "intervals",
@@ -89,7 +90,7 @@ function CustomDrawerContent() {
     {
       key: "playground",
       name: state.labels.Playground,
-      icon: "trending-up-outline",
+      icon: "play-outline",
     },
   ];
 
@@ -152,7 +153,7 @@ function CustomDrawerContent() {
 
       {/* Language Selection */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Language</Text>
+        <Text style={styles.sectionTitle}>{state.labels.language}</Text>
         <View style={styles.languageGrid}>
           {languages.map((lang) => (
             <TouchableOpacity
@@ -178,7 +179,7 @@ function CustomDrawerContent() {
       </View>
       {/* instrumets Selection */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Instrument</Text>
+        <Text style={styles.sectionTitle}>{state.labels.Instrument}</Text>
         <View style={styles.languageGrid}>
           {instruments.map((inst) => (
             <TouchableOpacity
@@ -189,7 +190,13 @@ function CustomDrawerContent() {
               ]}
               onPress={() => changeInstrument(inst.code as any)}
             >
-              <Ionicons name={inst.icon as any} size={20} color="#007AFF" />
+              <MaterialCommunityIcons
+                name={inst.icon as any}
+                size={20}
+                color="#03866a"
+                style={{ marginRight: 5 }}
+              />
+
               <Text
                 style={[
                   styles.languageName,
@@ -205,7 +212,7 @@ function CustomDrawerContent() {
 
       {/* Settings Switches */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Preferences</Text>
+        <Text style={styles.sectionTitle}>{state.labels.Preferences}</Text>
 
         <View style={styles.settingRow}>
           <View style={styles.settingInfo}>
@@ -237,7 +244,7 @@ function CustomDrawerContent() {
 
       {/* Navigation */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Navigation</Text>
+        <Text style={styles.sectionTitle}>{state.labels.Navigation}</Text>
         {screens.map((screen) => (
           <TouchableOpacity
             key={screen.key}
@@ -812,5 +819,6 @@ const styles = StyleSheet.create({
     color: "#333",
     marginLeft: 12,
     flex: 1,
+    textAlign: "left",
   },
 });
