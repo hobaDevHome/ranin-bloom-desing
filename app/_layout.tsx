@@ -18,13 +18,14 @@ import {
   Image,
   Platform,
   Switch,
+  ScrollView,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
+
 import { DrawerActions } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SettingsProvider, useSettings } from "../context/SettingsContext";
-
+import Foundation from "@expo/vector-icons/Foundation";
 import Head from "expo-router/head";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-gesture-handler";
@@ -37,20 +38,67 @@ import tr from "../assets/images/tr.png";
 
 // Prevent splash screen from auto-hiding before asset loading is complete
 SplashScreen.preventAutoHideAsync();
+const languages = [
+  { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "ar", name: "العربية", flag: "🇸🇦" },
+  { code: "fa", name: "فارسی", flag: "🇮🇷" }, // Persian (Iran)
+  { code: "tr", name: "Türkçe", flag: "🇹🇷" }, // Turkish (Turkey)
+];
+const instruments = [
+  { code: "piano", name: "piano", icon: "create-outline" },
+  { code: "oud", name: "oud", icon: "create-outline" },
+];
 
 function CustomDrawerContent() {
   const navigation = useNavigation<DrawerNavigationProp<any>>();
   const { state, dispatch } = useSettings();
   const [autoQuestion, setAutoQuestion] = useState<boolean>(false);
   const [backToTonic, setBackToTonic] = useState<boolean>(false);
-  const [selectedTone, setSelectedTone] = useState(state.toneLabel);
+  const screens = [
+    { key: "index", name: state.labels.home, icon: "home-outline" },
+    {
+      key: "IntroGame/index",
+      name: state.labels.introGame,
+      icon: "game-controller-outline",
+    },
+    {
+      key: "LearnTheMethod",
+      name: state.labels.learnMethod,
+      icon: "create-outline",
+    },
+    {
+      key: "Training/index",
+      name: state.labels.basicTraining,
+      icon: "pulse-outline",
+    },
+    {
+      key: "Dictations/index",
+      name: state.labels.melodicDictations,
+      icon: "trending-up-outline",
+    },
+    {
+      key: "intervals",
+      name: state.labels.intervals,
+      icon: "analytics-outline",
+    },
+    {
+      key: "maqamat",
+      name: state.labels.maqamat,
+      icon: "musical-notes-outline",
+    },
+    {
+      key: "playground",
+      name: state.labels.Playground,
+      icon: "trending-up-outline",
+    },
+  ];
 
   const toggleLanguage = (lang: "en" | "ar" | "fa" | "tr") => {
     dispatch({
       type: "SET_LANGUAGE",
       payload: lang,
     });
-    navigation.dispatch(DrawerActions.closeDrawer());
+    // navigation.dispatch(DrawerActions.closeDrawer());
   };
 
   const toggleAutoQuestionJump = (auto: boolean) => {
@@ -70,7 +118,7 @@ function CustomDrawerContent() {
       type: "SET_BACKTOTONIC",
       payload: back,
     });
-    navigation.dispatch(DrawerActions.closeDrawer());
+    //  navigation.dispatch(DrawerActions.closeDrawer());
   };
 
   // a handler for choosieng hte innstrument
@@ -79,156 +127,130 @@ function CustomDrawerContent() {
       type: "SET_INSTRUMENT",
       payload: instrument,
     });
-    navigation.dispatch(DrawerActions.closeDrawer());
+    // navigation.dispatch(DrawerActions.closeDrawer());
   };
 
   const navigateTo = (screenName: string) => {
+    console.log("screenName", screenName);
     navigation.navigate(screenName);
-    navigation.dispatch(DrawerActions.closeDrawer());
+    //navigation.dispatch(DrawerActions.closeDrawer());
   };
 
   return (
-    <View style={{ flex: 1, padding: 20, backgroundColor: "#f6e2b7" }}>
-      <View style={styles.container}>
-        <View style={styles.languagesContianer}>
-          <TouchableOpacity onPress={() => toggleLanguage("ar")}>
-            <Image source={ar} style={styles.languageIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => toggleLanguage("en")}>
-            <Image source={en} style={styles.languageIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => toggleLanguage("fa")}>
-            <Image source={fa} style={styles.languageIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => toggleLanguage("tr")}>
-            <Image source={tr} style={styles.languageIcon} />
-          </TouchableOpacity>
-        </View>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* // setting header and close button */}
 
-        {/* <Text style={styles.header}> {state.labels.goto}</Text> */}
+      <View style={styles.header}>
         <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("Home")}
+          onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
+          style={styles.closeButton}
         >
-          <Text style={styles.linkText}>🏠 {state.labels.home}</Text>
+          <Ionicons name="close" size={24} color="#333" />
         </TouchableOpacity>
-        {/* // menu links */}
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("IntroGame")}
-        >
-          <Text style={styles.linkText}>{state.labels.introGame}</Text>
-        </TouchableOpacity>
+        <Text style={styles.title}>{state.labels.settings}</Text>
+      </View>
 
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("LearnTheMethod")}
-        >
-          <Text style={styles.linkText}>{state.labels.learnMethod}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("Training")}
-        >
-          <Text style={styles.linkText}>{state.labels.basicTraining}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("Dictations")}
-        >
-          <Text style={styles.linkText}>{state.labels.melodicDictations}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("intervals")}
-        >
-          <Text style={styles.linkText}>{state.labels.intervals}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("maqamat")}
-        >
-          <Text style={styles.linkText}>{state.labels.maqamat}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.link}
-          onPress={() => navigateTo("playground")}
-        >
-          <Text style={styles.linkText}>{state.labels.Playground}</Text>
-        </TouchableOpacity>
-        {/* <Text style={styles.header}>🎵 {state.labels.chooseInstrument}</Text> */}
-
-        <View style={styles.instContianer}>
-          <TouchableOpacity
-            style={{
-              padding: 10,
-              borderRadius: 5,
-              marginBottom: 10,
-            }}
-            onPress={() => changeInstrument("piano")}
-          >
-            <Image source={piano} style={styles.instIcon} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{
-              padding: 10,
-              borderRadius: 5,
-              marginBottom: 10,
-            }}
-            onPress={() => changeInstrument("oud")}
-          >
-            <Image source={oud} style={styles.instIcon} />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={[
-            styles.switchContainer,
-            {
-              flexDirection:
-                state.language === "ar" || state.language === "fa"
-                  ? "row-reverse"
-                  : "row",
-            },
-          ]}
-        >
-          <Switch
-            value={autoQuestion}
-            style={styles.switch}
-            onValueChange={(value) => toggleAutoQuestionJump(value)}
-            thumbColor={autoQuestion ? "#4CAF50" : "#f4f3f4"}
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-          />
-          <Text style={{ marginLeft: 10 }}>{state.labels.autoJump}</Text>
-        </View>
-
-        <View
-          style={[
-            styles.switchContainer,
-            {
-              flexDirection:
-                state.language === "ar" || state.language === "fa"
-                  ? "row-reverse"
-                  : "row",
-            },
-          ]}
-        >
-          <Switch
-            value={backToTonic}
-            style={styles.switch}
-            onValueChange={(value) => toggleBackToTonic(value)}
-            thumbColor={backToTonic ? "#4CAF50" : "#f4f3f4"}
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-          />
-          <Text style={{ marginLeft: 10 }}>{state.labels.backToTonic}</Text>
+      {/* Language Selection */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Language</Text>
+        <View style={styles.languageGrid}>
+          {languages.map((lang) => (
+            <TouchableOpacity
+              key={lang.code}
+              style={[
+                styles.languageButton,
+                state.language === lang.code && styles.languageButtonActive,
+              ]}
+              onPress={() => toggleLanguage(lang.code as any)}
+            >
+              <Text style={styles.languageFlag}>{lang.flag}</Text>
+              <Text
+                style={[
+                  styles.languageName,
+                  state.language === lang.code && styles.languageNameActive,
+                ]}
+              >
+                {lang.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
-    </View>
+      {/* instrumets Selection */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Instrument</Text>
+        <View style={styles.languageGrid}>
+          {instruments.map((inst) => (
+            <TouchableOpacity
+              key={inst.code}
+              style={[
+                styles.languageButton,
+                state.instrument === inst.code && styles.instButtonActive,
+              ]}
+              onPress={() => changeInstrument(inst.code as any)}
+            >
+              <Ionicons name={inst.icon as any} size={20} color="#007AFF" />
+              <Text
+                style={[
+                  styles.languageName,
+                  state.language === inst.code && styles.languageNameActive,
+                ]}
+              >
+                {inst.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+
+      {/* Settings Switches */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Preferences</Text>
+
+        <View style={styles.settingRow}>
+          <View style={styles.settingInfo}>
+            <Foundation name="next" size={20} color="#666" />
+            <Text style={styles.settingLabel}>{state.labels.autoJump}</Text>
+          </View>
+          <Switch
+            value={autoQuestion}
+            onValueChange={(value) => toggleAutoQuestionJump(value)}
+            trackColor={{ false: "#E5E5E5", true: "#007AFF" }}
+            thumbColor="#FFFFFF"
+          />
+        </View>
+
+        <View style={styles.settingRow}>
+          <View style={styles.settingInfo}>
+            <Ionicons name="return-up-back" size={20} color="#666" />
+
+            <Text style={styles.settingLabel}>{state.labels.backToTonic}</Text>
+          </View>
+          <Switch
+            value={backToTonic}
+            onValueChange={(value) => toggleBackToTonic(value)}
+            trackColor={{ false: "#E5E5E5", true: "#007AFF" }}
+            thumbColor="#FFFFFF"
+          />
+        </View>
+      </View>
+
+      {/* Navigation */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Navigation</Text>
+        {screens.map((screen) => (
+          <TouchableOpacity
+            key={screen.key}
+            style={styles.navItem}
+            onPress={() => navigateTo(screen.key)}
+          >
+            <Ionicons name={screen.icon as any} size={20} color="#007AFF" />
+            <Text style={styles.navLabel}>{screen.name}</Text>
+            <Ionicons name="chevron-forward" size={16} color="#999" />
+          </TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -665,14 +687,25 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff8e1",
+    backgroundColor: "#FFFFFF",
     padding: 20,
   },
   header: {
-    fontSize: 20,
-    marginBottom: 10,
-    color: "#6a1b9a",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingTop: 60,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0F0",
+  },
+  closeButton: {
+    marginRight: 16,
+  },
+  title: {
+    fontSize: 24,
     fontWeight: "bold",
+    color: "#333",
   },
   button: {
     backgroundColor: "#ba68c8",
@@ -703,5 +736,81 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     resizeMode: "contain",
+  },
+  section: {
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0F0",
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 16,
+  },
+  languageGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  languageButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 12,
+    backgroundColor: "#F8F8F8",
+    borderWidth: 2,
+    borderColor: "transparent",
+    minWidth: "45%",
+  },
+  languageButtonActive: {
+    backgroundColor: "#E3F2FD",
+    borderColor: "#007AFF",
+  },
+  instButtonActive: {
+    backgroundColor: "#ecfaf2",
+    borderColor: "#0c915e",
+  },
+  languageFlag: {
+    fontSize: 20,
+    marginRight: 8,
+  },
+  languageName: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#666",
+  },
+  languageNameActive: {
+    color: "#007AFF",
+    fontWeight: "600",
+  },
+  settingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+  },
+  settingInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  settingLabel: {
+    fontSize: 14,
+    color: "#333",
+    marginLeft: 12,
+  },
+  navItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 16,
+    paddingHorizontal: 4,
+  },
+  navLabel: {
+    fontSize: 16,
+    color: "#333",
+    marginLeft: 12,
+    flex: 1,
   },
 });

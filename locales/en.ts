@@ -16,7 +16,7 @@ export default {
   goto: "Go to: ",
   home: "Home",
   questionNo: "Question No.",
-  autoJump: "Automatically move to the next question",
+  autoJump: "Auto Move to next question",
   backToTonic: "Play all the tones back to tonic",
   chooseInstrument: "Choose Instrument",
   melodicDictations: "Dictations",
