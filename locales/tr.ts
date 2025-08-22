@@ -2,7 +2,7 @@ export default {
   settings: "Ayarlar",
   language: "Dil",
   settingsText: "Dilini İngilizce olarak değiştir",
-  appHeader: "Note Quest",
+  appHeader: "Ranin",
   welcome: "Note Quest'e Hoş Geldiniz",
   introGame: "Tanıtım Oyunu",
   learnMethod: "Yöntem",
@@ -25,12 +25,22 @@ export default {
   Playground: "Oyun Alanı",
   correctAnswer: "Doğru cevap: ",
   chooseLables: "Ton Etiketlerini Seç",
+  chooseAnAcitivity: "Eğitim Seç",
   keyLabels: {
     DoReMi: "Do, Re, Mi",
     Numbers: "1, 2, 3",
     CDE: "C, D, E",
   },
 
+  homePage: {
+    testYouEar: "Test etmeyi deneyin",
+    knowAboutMaqams: "Maqamlar hakkında bilin",
+    timeForTraining: "Deneme zamanı",
+    abitOfdictations: "Kısa diktasyonlar",
+    diffBetweenIntervals: "Aralıklar arasındaki fark",
+    guessTheMaqam: "Maqamı tahmin et",
+    someFun: "Oyun alanı",
+  },
   introGamePage: {
     header: "Tanıtım Oyunu",
     pages: {

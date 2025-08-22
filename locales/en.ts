@@ -2,7 +2,7 @@ export default {
   settings: "Settings",
   language: "Language",
   settingsText: "Change your language to English",
-  appHeader: "Note Quest",
+  appHeader: "Ranin",
   welcome: "Welcome to Note Quest",
   introGame: "Intro Game",
   learnMethod: "The Method",
@@ -25,10 +25,20 @@ export default {
   Playground: "Playground",
   correctAnswer: "Correct answer is : ",
   chooseLables: "Select tones Labels",
+  chooseAnAcitivity: "Choose an activity",
   keyLabels: {
     DoReMi: "Do, Re, Mi",
     Numbers: "1, 2, 3",
     CDE: "C, D, E",
+  },
+  homePage: {
+    testYouEar: "Test Your Ear",
+    knowAboutMaqams: "Know About Maqams",
+    timeForTraining: "Time For Training",
+    abitOfdictations: "A bit of dictations",
+    diffBetweenIntervals: "Know the differences",
+    guessTheMaqam: "Guess the Maqam",
+    someFun: "Have Some Fun",
   },
 
   introGamePage: {

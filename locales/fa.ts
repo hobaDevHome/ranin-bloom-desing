@@ -2,7 +2,7 @@ export default {
   settings: "تنظیمات",
   language: "زبان",
   settingsText: "زبان خود را به انگلیسی تغییر دهید",
-  appHeader: "نوت کوئست",
+  appHeader: "رنین",
   welcome: "به نوت کوئست خوش آمدید",
   introGame: "بازی مقدماتی",
   learnMethod: "روش",
@@ -25,12 +25,22 @@ export default {
   Playground: "زمین بازی",
   correctAnswer: "پاسخ صحیح: ",
   chooseLables: "انتخاب برچسب‌های نت",
+  chooseAnAcitivity: "انتخاب فعالیت",
   keyLabels: {
     DoReMi: "دو، ر، می",
     Numbers: "۱، ۲، ۳",
     CDE: "C، D، E",
   },
 
+  homePage: {
+    testYouEar: "اختبر درهای شما",
+    knowAboutMaqams: "درباره مقامات",
+    timeForTraining: "زمان برای تمرین",
+    abitOfdictations: "حاول استنتاج نغمات",
+    diffBetweenIntervals: "تعلم فرق بین فواصل",
+    guessTheMaqam: "خمن مقام مسموع",
+    someFun: "زمان لهو",
+  },
   introGamePage: {
     header: "بازی مقدماتی",
     pages: {

@@ -38,47 +38,47 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("@/assets/images/home-2.jpg")}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      />
-
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            alignSelf: state.language === "ar" ? "flex-end" : "flex-start",
+            marginLeft: state.language === "ar" ? 0 : 24,
+            marginRight: state.language === "ar" ? 24 : 0,
+          },
+        ]}
+      >
+        {state.labels.chooseAnAcitivity}
+      </Text>
       {/* Buttons Container */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={[styles.button, styles.button1]}
+          style={[styles.activityCard, styles.button1]}
           onPress={() => navigateTo("IntroGame/index")}
+          activeOpacity={0.8}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
-            <Ionicons
-              name="game-controller"
-              size={30}
-              color="#fff"
-              style={styles.buttonIcon}
-            />
-
-            <Text style={styles.buttonText}>{state.labels.introGame}</Text>
+            <Ionicons name="game-controller" size={30} color="#fff" />
           </View>
+          <Text style={styles.activityTitle}>{state.labels.introGame}</Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.testYouEar}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.button2]}
+          style={[styles.activityCard, styles.button2]}
           onPress={() => navigateTo("LearnTheMethod")}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
             <MaterialIcons
               name="school"
@@ -86,20 +86,21 @@ export default function HomeScreen() {
               color="#fff"
               style={styles.buttonIcon}
             />
-            <Text style={styles.buttonText}>{state.labels.learnMethod}</Text>
           </View>
+          <Text style={styles.activityTitle}>{state.labels.learnMethod}</Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.knowAboutMaqams}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.button3]}
+          style={[styles.activityCard, styles.button3]}
           onPress={() => navigateTo("Training/index")}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
             <MaterialIcons
               name="fitness-center"
@@ -107,20 +108,21 @@ export default function HomeScreen() {
               color="#fff"
               style={styles.buttonIcon}
             />
-            <Text style={styles.buttonText}>{state.labels.basicTraining}</Text>
           </View>
+          <Text style={styles.activityTitle}>{state.labels.basicTraining}</Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.timeForTraining}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.button4]}
+          style={[styles.activityCard, styles.button4]}
           onPress={() => navigateTo("Dictations/index")}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
             <FontAwesome
               name="assistive-listening-systems"
@@ -128,23 +130,23 @@ export default function HomeScreen() {
               size={24}
               style={styles.buttonIcon}
             />
-
-            <Text style={styles.buttonText}>
-              {state.labels.melodicDictations}
-            </Text>
           </View>
+          <Text style={styles.activityTitle}>
+            {state.labels.melodicDictations}
+          </Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.abitOfdictations}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.button1]}
+          style={[styles.activityCard, styles.button5]}
           onPress={() => navigateTo("intervals")}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
             <MaterialIcons
               name="graphic-eq"
@@ -152,20 +154,21 @@ export default function HomeScreen() {
               color="#fff"
               style={styles.buttonIcon}
             />
-            <Text style={styles.buttonText}>{state.labels.intervals}</Text>
           </View>
+          <Text style={styles.activityTitle}>{state.labels.intervals}</Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.diffBetweenIntervals}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.button2]}
+          style={[styles.activityCard, styles.button6]}
           onPress={() => navigateTo("maqamat")}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
             <MaterialIcons
               name="library-music"
@@ -173,20 +176,21 @@ export default function HomeScreen() {
               color="#fff"
               style={styles.buttonIcon}
             />
-            <Text style={styles.buttonText}>{state.labels.maqamat}</Text>
           </View>
+          <Text style={styles.activityTitle}>{state.labels.maqamat}</Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.guessTheMaqam}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, styles.button3]}
+          style={[styles.activityCard, styles.button7]}
           onPress={() => navigateTo("playground")}
         >
           <View
-            style={[
-              styles.buttonContent,
-              {
-                flexDirection: state.language === "ar" ? "row-reverse" : "row",
-              },
-            ]}
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
           >
             <MaterialIcons
               name="piano"
@@ -194,8 +198,11 @@ export default function HomeScreen() {
               color="#fff"
               style={styles.buttonIcon}
             />
-            <Text style={styles.buttonText}>{state.labels.Playground}</Text>
           </View>
+          <Text style={styles.activityTitle}>{state.labels.Playground}</Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.homePage.someFun}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -206,8 +213,18 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f6e2b7", // Soft warm background color
+    backgroundColor: "#FAFAFA", // Soft warm background color
     alignItems: "center",
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 20,
+    marginTop: 20,
+    textAlign: "left",
+
+    marginLeft: 24,
   },
   backgroundImage: {
     width: "90%",
@@ -221,7 +238,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 8,
   },
   button: {
     paddingVertical: 30,
@@ -231,6 +248,39 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 5,
+  },
+  activityCard: {
+    width: "47%",
+    aspectRatio: 1,
+    borderRadius: 20,
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    marginBottom: 16,
+  },
+  iconContainer: {
+    marginBottom: 12,
+  },
+  activityTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    marginBottom: 4,
+  },
+  activitySubtitle: {
+    fontSize: 12,
+    color: "#FFFFFF",
+    textAlign: "center",
+    opacity: 0.9,
   },
   buttonContent: {
     alignItems: "center",
@@ -244,22 +294,25 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   button1: {
-    backgroundColor: "#b9414c",
+    backgroundColor: "#FF6B6B",
   },
   button2: {
-    backgroundColor: "#dda276",
+    backgroundColor: "#4ECDC4",
   },
   button3: {
-    backgroundColor: "#3aa1ac",
+    backgroundColor: "#45B7D1",
   },
   button4: {
-    backgroundColor: "#e89e97",
+    backgroundColor: "#96CEB4",
   },
   button5: {
-    backgroundColor: "#839278",
+    backgroundColor: "#eecb59",
   },
   button6: {
-    backgroundColor: "#d3803f",
+    backgroundColor: "#DDA0DD",
+  },
+  button7: {
+    backgroundColor: "#FFB347",
   },
   buttonIcon: {
     marginRight: 8,

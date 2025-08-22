@@ -296,6 +296,11 @@ function AppContent() {
           name="index"
           options={({ navigation }) => ({
             title: state.labels.appHeader,
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 22,
+              color: "#222", // title text color
+            },
             headerShown: true,
             headerTitleAlign: "center",
             headerLeft: () => null,

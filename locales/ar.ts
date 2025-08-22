@@ -20,16 +20,27 @@ export default {
   backToTonic: "لعب النغمات حتى درجة الركوز",
   chooseInstrument: "اختر الآلة",
   chooseLables: "اختر اسماء النغمات",
+  chooseAnAcitivity: "اختر نشاط",
   keyLabels: {
     DoReMi: "دو ، ري ، مي",
     Numbers: "1, 2, 3",
     CDE: "C, D, E",
   },
+
   questionNo: "السؤال رقم ",
   settings: "اعدادات",
   language: "اللغة",
   settingsText: "تغيير اللغة للعربية",
-  appHeader: "Note Quest",
+  appHeader: "رنين",
+  homePage: {
+    testYouEar: "اختبر أذنك",
+    knowAboutMaqams: "تعرف على المقامات",
+    timeForTraining: "وقت التدريب",
+    abitOfdictations: "حاول استنتاج النغمات",
+    diffBetweenIntervals: "تعلم الفرق بين الفواصل ",
+    guessTheMaqam: "خمن المقام المسموع",
+    someFun: "وقت اللهو",
+  },
   introGamePage: {
     header: "اللعبة التمهيدية",
     pages: {
