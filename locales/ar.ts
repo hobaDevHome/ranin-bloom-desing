@@ -47,6 +47,9 @@ export default {
   },
   introGamePage: {
     header: "اللعبة التمهيدية",
+    chooseYourChallenge: "اختر مسابقتك",
+    intro:
+      "اختر عدد النغمات التي تريد تحديها في اللعبة التمهيدية. بدء من الفواصل البسيطة وتقدم للمقامات المعقومة.",
     pages: {
       overview: "مقدمة",
       level1: "1- دو - ري",

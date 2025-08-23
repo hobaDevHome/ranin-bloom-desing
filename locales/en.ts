@@ -47,6 +47,9 @@ export default {
 
   introGamePage: {
     header: "Intro Game",
+    chooseYourChallenge: "Choose Your Challenge",
+    intro:
+      "Select the number of tones you want to be tested on. Start with simple intervals and work your way up to complex scales.",
     pages: {
       overview: "Overview",
       level1: "1. Do, Re",

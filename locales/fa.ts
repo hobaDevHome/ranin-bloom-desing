@@ -48,6 +48,9 @@ export default {
   },
   introGamePage: {
     header: "بازی مقدماتی",
+    chooseYourChallenge: "انتخاب مسابقت شما",
+    intro:
+      "انتخاب تعداد نغمات که می‌خواهید در بازی مقدماتی تمرین بگیرید. از فواصل ساده شروع کنید و بازی را باز کنید.",
     pages: {
       overview: "مرور کلی",
       level1: "۱. دو، ر",

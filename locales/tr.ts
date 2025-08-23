@@ -47,6 +47,9 @@ export default {
   },
   introGamePage: {
     header: "Tanıtım Oyunu",
+    chooseYourChallenge: "Seni seçti",
+    intro:
+      "Seçtğiniz ton sayısını tanıtım oyununda deneyin. Basit aralıklardan baslayın ve zorluk seviyesini arttırın.",
     pages: {
       overview: "Genel Bakış",
       level1: "1. Do, Re",

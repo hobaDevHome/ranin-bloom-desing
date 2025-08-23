@@ -89,10 +89,11 @@ export default function IntroGame() {
     >
       {/* Header */}
       <View style={styles.instructionsContainer}>
-        <Text style={styles.instructionsTitle}>Choose Your Challenge</Text>
+        <Text style={styles.instructionsTitle}>
+          {state.labels.introGamePage.chooseYourChallenge}
+        </Text>
         <Text style={styles.instructionsText}>
-          Select the number of tones you want to be tested on. Start with simple
-          intervals and work your way up to complex scales.
+          {state.labels.introGamePage.intro}
         </Text>
       </View>
       {/* // overview button */}
@@ -255,7 +256,8 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   instructionsContainer: {
-    paddingVertical: 24,
+    paddingTop: 5,
+    paddingBottom: 22,
     alignItems: "center",
   },
   instructionsTitle: {
