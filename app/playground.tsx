@@ -4,6 +4,7 @@ import { Asset } from "expo-asset";
 import { Audio } from "expo-av";
 import { useSettings } from "../context/SettingsContext";
 import { soundFolders } from "../constants/scales";
+import { Ionicons } from "@expo/vector-icons";
 
 // Define the piano layout with toggle info for keys that support quarter tones
 const pianoLayout = [
@@ -180,6 +181,20 @@ const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({ onKeyPress }) => {
 
   return (
     <View style={styles.mainContainer}>
+      <View style={styles.intro}>
+        <Ionicons
+          name="musical-notes"
+          size={32}
+          color="#45b7d1"
+          style={{ marginBottom: 5 }}
+        />
+        <Text style={styles.activityTitle}>
+          {state.labels.playGroundPage.express}
+        </Text>
+        <Text style={styles.activitySubtitle}>
+          {state.labels.playGroundPage.intro}
+        </Text>
+      </View>
       {/* Toggle buttons container */}
       <View style={styles.toggleContainer}>
         <View style={styles.toggleRow}>
@@ -360,9 +375,9 @@ const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({ onKeyPress }) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#e0e0e0",
+    backgroundColor: "#FAFAFA",
   },
   pianoContainer: {
     width: "90%",
@@ -370,6 +385,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     alignSelf: "center",
     overflow: "visible",
+    marginTop: 50,
   },
   whiteKey: {
     backgroundColor: "#ffffff",
@@ -450,6 +466,39 @@ const styles = StyleSheet.create({
   toggleKeyActive: {
     // borderColor: "#33e09e",
     // backgroundColor: "#b5ffe0",
+  },
+  intro: {
+    padding: 20,
+    width: 300,
+    height: 180,
+    marginBottom: 100,
+    marginTop: 50,
+    borderRadius: 15,
+
+    justifyContent: "center",
+    alignItems: "center",
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  activityTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333333",
+    textAlign: "center",
+    marginBottom: 4,
+  },
+  activitySubtitle: {
+    fontSize: 14,
+    color: "#6f6f6f",
+    textAlign: "center",
+    opacity: 0.9,
   },
 });
 

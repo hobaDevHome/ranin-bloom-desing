@@ -232,4 +232,9 @@ export default {
     correctSequence: "النغمات الصحيحة هي",
     intro: "حدد المقام المطلوب",
   },
+
+  playGroundPage: {
+    express: "عبر عن نفسك",
+    intro: "هذه مساحتك الخاصة، اعزف موسيقاك وعبر عن مشاعرك بحرية",
+  },
 };

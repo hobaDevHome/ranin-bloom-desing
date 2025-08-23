@@ -44,6 +44,11 @@ export default {
     guessTheMaqam: "Guess the Maqam",
     someFun: "Have Some Fun",
   },
+  playGroundPage: {
+    express: "Express Yourself",
+    intro:
+      "This is your musical playground. Tap the keys to explore sounds, create melodies, and let your creativity flow freely.",
+  },
 
   introGamePage: {
     header: "Intro Game",

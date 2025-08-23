@@ -231,4 +231,9 @@ export default {
     correctSequence: "Doğru Sıralama ",
     intro: "Hangi bölümü dikkate almak istiyorsunuz?",
   },
+  playGroundPage: {
+    express: "Kendini ifade et",
+    intro:
+      "Burası senin özel alanın, müziğini çal ve duygularını özgürce ifade et",
+  },
 };
