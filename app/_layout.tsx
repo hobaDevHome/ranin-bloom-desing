@@ -4,262 +4,33 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
+
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState, useCallback } from "react";
 import "react-native-reanimated";
 import { Drawer } from "expo-router/drawer";
-import { router, Stack, useNavigation } from "expo-router";
+import { router, Stack } from "expo-router";
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  Image,
   Platform,
-  Switch,
-  ScrollView,
 } from "react-native";
 
 import { DrawerActions } from "@react-navigation/native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
 import { Ionicons } from "@expo/vector-icons";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SettingsProvider, useSettings } from "../context/SettingsContext";
-import Foundation from "@expo/vector-icons/Foundation";
+
 import Head from "expo-router/head";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-gesture-handler";
-import piano from "../assets/images/piano.png";
-import oud from "../assets/images/oud.png";
-import ar from "../assets/images/ar.png";
-import fa from "../assets/images/fa.png";
-import en from "../assets/images/en.png";
-import tr from "../assets/images/tr.png";
+import CustomDrawerContent from "../components/ui/Drawer";
 
 // Prevent splash screen from auto-hiding before asset loading is complete
 SplashScreen.preventAutoHideAsync();
-const languages = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "ar", name: "العربية", flag: "🇸🇦" },
-  { code: "fa", name: "فارسی", flag: "🇮🇷" }, // Persian (Iran)
-  { code: "tr", name: "Türkçe", flag: "🇹🇷" }, // Turkish (Turkey)
-];
-const instruments = [
-  { code: "piano", name: "piano", icon: "piano" },
-  { code: "oud", name: "oud", icon: "guitar-acoustic" },
-];
-
-function CustomDrawerContent() {
-  const navigation = useNavigation<DrawerNavigationProp<any>>();
-  const { state, dispatch } = useSettings();
-  const [autoQuestion, setAutoQuestion] = useState<boolean>(false);
-  const [backToTonic, setBackToTonic] = useState<boolean>(false);
-  const screens = [
-    { key: "index", name: state.labels.home, icon: "home-outline" },
-    {
-      key: "IntroGame/index",
-      name: state.labels.introGame,
-      icon: "game-controller-outline",
-    },
-    {
-      key: "LearnTheMethod",
-      name: state.labels.learnMethod,
-      icon: "create-outline",
-    },
-    {
-      key: "Training/index",
-      name: state.labels.basicTraining,
-      icon: "pulse-outline",
-    },
-    {
-      key: "Dictations/index",
-      name: state.labels.melodicDictations,
-      icon: "ear-outline",
-    },
-    {
-      key: "intervals",
-      name: state.labels.intervals,
-      icon: "analytics-outline",
-    },
-    {
-      key: "maqamat",
-      name: state.labels.maqamat,
-      icon: "musical-notes-outline",
-    },
-    {
-      key: "playground",
-      name: state.labels.Playground,
-      icon: "play-outline",
-    },
-  ];
-
-  const toggleLanguage = (lang: "en" | "ar" | "fa" | "tr") => {
-    dispatch({
-      type: "SET_LANGUAGE",
-      payload: lang,
-    });
-    // navigation.dispatch(DrawerActions.closeDrawer());
-  };
-
-  const toggleAutoQuestionJump = (auto: boolean) => {
-    setAutoQuestion(auto);
-
-    dispatch({
-      type: "SET_AUTOQUESTIONJUMP",
-      payload: auto,
-    });
-    // navigation.dispatch(DrawerActions.closeDrawer());
-    console.log(state.autoQuestionJump);
-  };
-
-  const toggleBackToTonic = (back: boolean) => {
-    setBackToTonic(back);
-    dispatch({
-      type: "SET_BACKTOTONIC",
-      payload: back,
-    });
-    //  navigation.dispatch(DrawerActions.closeDrawer());
-  };
-
-  // a handler for choosieng hte innstrument
-  const changeInstrument = (instrument: string) => {
-    dispatch({
-      type: "SET_INSTRUMENT",
-      payload: instrument,
-    });
-    // navigation.dispatch(DrawerActions.closeDrawer());
-  };
-
-  const navigateTo = (screenName: string) => {
-    console.log("screenName", screenName);
-    navigation.navigate(screenName);
-    //navigation.dispatch(DrawerActions.closeDrawer());
-  };
-
-  return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* // setting header and close button */}
-
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
-          style={styles.closeButton}
-        >
-          <Ionicons name="close" size={24} color="#333" />
-        </TouchableOpacity>
-        <Text style={styles.title}>{state.labels.settings}</Text>
-      </View>
-
-      {/* Language Selection */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{state.labels.language}</Text>
-        <View style={styles.languageGrid}>
-          {languages.map((lang) => (
-            <TouchableOpacity
-              key={lang.code}
-              style={[
-                styles.languageButton,
-                state.language === lang.code && styles.languageButtonActive,
-              ]}
-              onPress={() => toggleLanguage(lang.code as any)}
-            >
-              <Text style={styles.languageFlag}>{lang.flag}</Text>
-              <Text
-                style={[
-                  styles.languageName,
-                  state.language === lang.code && styles.languageNameActive,
-                ]}
-              >
-                {lang.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
-      {/* instrumets Selection */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{state.labels.Instrument}</Text>
-        <View style={styles.languageGrid}>
-          {instruments.map((inst) => (
-            <TouchableOpacity
-              key={inst.code}
-              style={[
-                styles.languageButton,
-                state.instrument === inst.code && styles.instButtonActive,
-              ]}
-              onPress={() => changeInstrument(inst.code as any)}
-            >
-              <MaterialCommunityIcons
-                name={inst.icon as any}
-                size={20}
-                color="#03866a"
-                style={{ marginRight: 5 }}
-              />
-
-              <Text
-                style={[
-                  styles.languageName,
-                  state.language === inst.code && styles.languageNameActive,
-                ]}
-              >
-                {inst.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
-
-      {/* Settings Switches */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{state.labels.Preferences}</Text>
-
-        <View style={styles.settingRow}>
-          <View style={styles.settingInfo}>
-            <Foundation name="next" size={20} color="#666" />
-            <Text style={styles.settingLabel}>{state.labels.autoJump}</Text>
-          </View>
-          <Switch
-            value={autoQuestion}
-            onValueChange={(value) => toggleAutoQuestionJump(value)}
-            trackColor={{ false: "#E5E5E5", true: "#007AFF" }}
-            thumbColor="#FFFFFF"
-          />
-        </View>
-
-        <View style={styles.settingRow}>
-          <View style={styles.settingInfo}>
-            <Ionicons name="return-up-back" size={20} color="#666" />
-
-            <Text style={styles.settingLabel}>{state.labels.backToTonic}</Text>
-          </View>
-          <Switch
-            value={backToTonic}
-            onValueChange={(value) => toggleBackToTonic(value)}
-            trackColor={{ false: "#E5E5E5", true: "#007AFF" }}
-            thumbColor="#FFFFFF"
-          />
-        </View>
-      </View>
-
-      {/* Navigation */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{state.labels.Navigation}</Text>
-        {screens.map((screen) => (
-          <TouchableOpacity
-            key={screen.key}
-            style={styles.navItem}
-            onPress={() => navigateTo(screen.key)}
-          >
-            <Ionicons name={screen.icon as any} size={20} color="#007AFF" />
-            <Text style={styles.navLabel}>{screen.name}</Text>
-            <Ionicons name="chevron-forward" size={16} color="#999" />
-          </TouchableOpacity>
-        ))}
-      </View>
-    </ScrollView>
-  );
-}
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
