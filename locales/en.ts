@@ -199,6 +199,8 @@ export default {
   },
   basicTrainingPages: {
     basicTrainingHome: {
+      intro:
+        "Select which part of Maqam you want to be tested on. Start with one half and work your way up to full maqams.",
       title: "Basic Training",
       Agam: "Agam",
       Rast: "Rast",

@@ -191,6 +191,7 @@ export default {
   basicTrainingPages: {
     basicTrainingHome: {
       title: "تمرین پایه",
+      intro: "اولین سطح تمرین روی مقام",
       Agam: "آگام",
       Rast: "راست",
       Bayaty: "بیات",

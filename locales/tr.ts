@@ -200,6 +200,7 @@ export default {
   basicTrainingPages: {
     basicTrainingHome: {
       title: "Temel Eğitim",
+      intro: "Makam Üzerine Eğitim",
       Agam: "Agam",
       Rast: "Rast",
       Bayaty: "Bayati",

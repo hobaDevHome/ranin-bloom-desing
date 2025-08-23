@@ -201,6 +201,7 @@ export default {
   basicTrainingPages: {
     basicTrainingHome: {
       title: "التدريب الأساسي",
+      intro: "حدد المقام المطلوب،  وابدا بالنصف وقم بالتقدم إلى المقام الكامل",
       Agam: "عجم",
       Rast: "رست",
       Bayaty: "بياتي",
