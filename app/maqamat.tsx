@@ -411,23 +411,32 @@ const MaqamTrainingScreen = () => {
           </View>
         </View>
 
-        <View style={styles.playButtonContiner}>
-          {/* Play Button */}
-          <PlayButton
-            isPlaying={false}
-            label={lables.playMaqam}
-            playInterval={playMaqam}
-          />
-          {/* repeat Button */}
-          <RepeatButton
-            isPlaying={isPlaying}
-            label={lables.repeatButton}
-            repeatInterval={repeatMaqam}
-          />
-        </View>
-        <View style={styles.exampleButtonsView}>
-          {/* example Button */}
+        {/* Control Buttons */}
+        <View style={styles.controlsContainer}>
+          <TouchableOpacity
+            style={[styles.controlButton, styles.playButton]}
+            onPress={playMaqam}
+            disabled={isPlaying}
+          >
+            <Ionicons
+              name={isPlaying ? "hourglass-outline" : "play"}
+              size={24}
+              color="#FFFFFF"
+            />
+            <Text style={styles.controlButtonText}>{lables.playMaqam}</Text>
+          </TouchableOpacity>
 
+          <TouchableOpacity
+            style={[styles.controlButton, styles.repeatButton]}
+            onPress={repeatMaqam}
+            disabled={isPlaying}
+          >
+            <Ionicons name="refresh" size={24} color="#FFFFFF" />
+            <Text style={styles.controlButtonText}>{lables.repeatButton}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.exampleButtonsView}>
           {showExampleControlButton && (
             <TouchableOpacity
               onPress={toggleExamplePlayback}
@@ -440,11 +449,14 @@ const MaqamTrainingScreen = () => {
               />
             </TouchableOpacity>
           )}
-          <RepeatButton
-            isPlaying={isPlaying}
-            label={lables.example}
-            repeatInterval={playExample}
-          />
+          <TouchableOpacity
+            style={[styles.controlButton, styles.nextButton]}
+            onPress={playExample}
+            disabled={isPlaying}
+          >
+            <Ionicons name="play-skip-forward" size={24} color="#FFFFFF" />
+            <Text style={styles.controlButtonText}>{lables.example}</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Maqam Selection Buttons */}
@@ -467,14 +479,20 @@ const MaqamTrainingScreen = () => {
         </View>
 
         {/* Settings Button */}
+
         <View style={styles.settingsBtCont}>
           <TouchableOpacity
-            style={styles.settingsButton}
+            style={[styles.controlButton, styles.settingsButtonBG]}
             onPress={() => setModalVisible(true)}
           >
             <View style={styles.settingsBtnContainer}>
-              <Ionicons name="settings-outline" size={16} color="black" />
-              <Text style={styles.buttonText}>{lables.settings}</Text>
+              <Ionicons
+                name="settings-outline"
+                size={24}
+                color="#FFFFFF"
+                style={{ marginRight: 5 }}
+              />
+              <Text style={styles.controlButtonText}>{lables.settings}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -542,12 +560,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: "center",
   },
-  playButton: {
-    backgroundColor: "#34C759",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
+
   settingsButton: {
     backgroundColor: "#80cdc7",
     paddingVertical: 10,
@@ -555,12 +568,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginBottom: 10,
   },
-  nextButton: {
-    backgroundColor: "#FF9500",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-  },
+
   buttonText: {
     // color: "#fff",
     fontWeight: "bold",
@@ -741,6 +749,38 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#666",
     marginTop: 4,
+  },
+  controlsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+    gap: 12,
+  },
+  controlButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    borderRadius: 12,
+    gap: 8,
+  },
+  playButton: {
+    backgroundColor: "#4CAF50",
+  },
+  nextButton: {
+    backgroundColor: "#007AFF",
+  },
+  repeatButton: {
+    backgroundColor: "#FF9500",
+  },
+  settingsButtonBG: {
+    backgroundColor: "#45B7D1",
+  },
+  controlButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
   },
 });
 

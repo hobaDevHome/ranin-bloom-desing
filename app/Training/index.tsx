@@ -230,22 +230,4 @@ const styles = StyleSheet.create({
     top: 16,
     right: 16,
   },
-  instructionsContainer: {
-    paddingTop: 5,
-    paddingBottom: 22,
-    alignItems: "center",
-  },
-  instructionsTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  instructionsText: {
-    fontSize: 16,
-    color: "#666",
-    textAlign: "center",
-    lineHeight: 24,
-  },
 });
