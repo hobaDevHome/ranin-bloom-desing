@@ -22,12 +22,13 @@ type RootStackParamList = {
   "/Dictations/Dictaionsplay": LevelParams;
 };
 const buttonColors = [
-  "#b9414c",
-  "#dda276",
-  "#3aa1ac",
-  "#e89e97",
-  "#839278",
-  "#d3803f",
+  "#FF6B6B",
+  "#4ECDC4",
+  "#45B7D1",
+  "#96CEB4",
+  "#ecd484",
+  "#DDA0DD",
+  "#FFB347",
 ];
 export default function DictaionsHome() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -37,6 +38,15 @@ export default function DictaionsHome() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* Header */}
+      <View style={styles.instructionsContainer}>
+        <Text style={styles.instructionsTitle}>
+          {state.labels.introGamePage.chooseYourChallenge}
+        </Text>
+        <Text style={styles.instructionsText}>
+          {state.labels.dictations.intro}
+        </Text>
+      </View>
       {dictaionsLevels.map((level, index) => (
         <TouchableOpacity
           key={index}
@@ -74,17 +84,55 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: "#fbeccb",
+    backgroundColor: "#FAFAFA",
   },
 
   button: {
-    padding: 15,
-    marginVertical: 10,
-    borderRadius: 10,
-    flexDirection: "row",
+    borderRadius: 16,
+    padding: 24,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    position: "relative",
   },
   buttonText: {
     fontSize: 18,
     color: "#fff",
+  },
+  instructionsContainer: {
+    paddingTop: 5,
+    paddingBottom: 22,
+    alignItems: "center",
+  },
+  instructionsTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  instructionsText: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+    lineHeight: 24,
+  },
+  testHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  testName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    flex: 1,
   },
 });

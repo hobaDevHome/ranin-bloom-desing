@@ -230,5 +230,6 @@ export default {
     section: "على",
     play: "تدريب",
     correctSequence: "النغمات الصحيحة هي",
+    intro: "حدد المقام المطلوب",
   },
 };

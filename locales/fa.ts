@@ -220,5 +220,6 @@ export default {
     section: "روی",
     play: "اجرا",
     correctSequence: "ترتیب صحیح ",
+    intro: "انتخاب کنید که قسمتی از مقام را تمرین کنید.",
   },
 };

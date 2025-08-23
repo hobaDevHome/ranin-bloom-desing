@@ -229,5 +229,6 @@ export default {
     section: "Üzerinde",
     play: "Çal",
     correctSequence: "Doğru Sıralama ",
+    intro: "Hangi bölümü dikkate almak istiyorsunuz?",
   },
 };

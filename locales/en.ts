@@ -230,5 +230,6 @@ export default {
     section: "on The",
     play: "Play",
     correctSequence: "Correct Sequence ",
+    intro: "Select which part of Maqam you want to be tested on.",
   },
 };
