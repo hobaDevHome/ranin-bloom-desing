@@ -27,6 +27,8 @@ import {
   ImageBackground,
   Image,
   Platform,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 
 import { Asset } from "expo-asset";
@@ -384,36 +386,29 @@ const MaqamTrainingScreen = () => {
   };
   console.log("currentMaqams:", maqamsListFromLacale["Bayaty"]);
   return (
-    <ImageBackground
-      source={require("../assets/images/intervals_bg.png")}
-      resizeMode="cover" // Make sure the image covers the screen fully
-      style={styles.background}
-    >
-      <View style={styles.container}>
-        <View
-          style={[
-            styles.selectedInstCont,
-            { direction: state.language === "ar" ? "rtl" : "ltr" },
-          ]}
-        >
-          <Text style={styles.buttonText}>{lables.selectedInstrumnet}</Text>
-          <Image
-            source={instrumentImages[state.instrument]}
-            style={styles.instIcon}
-          />
-        </View>
-        <Text style={styles.title}>{lables.title}</Text>
-        <View style={styles.scoreContainer}>
-          {/* <Text style={styles.questionNumber}>{questionNumber}/10</Text> */}
-          <Text style={styles.score}>
-            {state.labels.introGamePage.levelPage.correct}{" "}
-            <Text style={{ color: "green" }}>{score.correct} </Text> |
-            {state.labels.introGamePage.levelPage.incorrect}{" "}
-            <Text style={{ color: "red" }}>{score.incorrect} </Text>
-          </Text>
-          <Text style={{ fontSize: 18, marginBottom: 10 }}>
-            {state.labels.questionNo}: {questionNumber}
-          </Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {/* <Text style={styles.title}>{lables.title}</Text> */}
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{score.correct}</Text>
+            <Text style={styles.statLabel}>
+              {state.labels.introGamePage.levelPage.correct}
+            </Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{score.incorrect}</Text>
+            <Text style={styles.statLabel}>
+              {" "}
+              {state.labels.introGamePage.levelPage.incorrect}
+            </Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{questionNumber}</Text>
+            <Text style={styles.statLabel}> {state.labels.questionNo}</Text>
+          </View>
         </View>
 
         <View style={styles.playButtonContiner}>
@@ -484,15 +479,6 @@ const MaqamTrainingScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* {showAnswer && (
-          <Text style={styles.buttonText}>
-            {state.labels.correctAnswer}
-            {state.language === "en"
-              ? currentMaqam
-              : maqamMap[currentMaqam as Maqam]}
-          </Text>
-        )} */}
-
         {/* Modal for Settings */}
         <Modal visible={modalVisible} transparent animationType="slide">
           <TouchableWithoutFeedback onPress={toggleModal}>
@@ -533,8 +519,8 @@ const MaqamTrainingScreen = () => {
             </View>
           </TouchableWithoutFeedback>
         </Modal>
-      </View>
-    </ImageBackground>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -542,16 +528,19 @@ const MaqamTrainingScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    backgroundColor: "#FAFAFA",
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 40,
+    color: "#333",
+    marginBottom: 20,
     marginTop: 20,
-    color: "#5c3829",
+    textAlign: "center",
   },
   playButton: {
     backgroundColor: "#34C759",
@@ -725,6 +714,33 @@ const styles = StyleSheet.create({
   score: {
     fontSize: 18,
     marginBottom: 20,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+  },
+  statCard: {
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#007AFF",
+  },
+  statLabel: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 4,
   },
 });
 

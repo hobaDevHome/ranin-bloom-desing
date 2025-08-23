@@ -91,8 +91,8 @@ export default {
     },
     levelPage: {
       header: "Tanıtım Oyunu Egzersizi",
-      correct: "Doğru: ",
-      incorrect: "Yanlış: ",
+      correct: "Doğru",
+      incorrect: "Yanlış",
       repeat: "Tekrarla",
       paly: "Sonraki Soru",
       palyMaqam: "Makamı Çal",

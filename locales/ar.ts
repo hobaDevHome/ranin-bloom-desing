@@ -90,8 +90,8 @@ export default {
     },
     levelPage: {
       header: "تمرين اللعبة التمهيدية",
-      correct: "صحيح: ",
-      incorrect: " خطأ: ",
+      correct: "صحيح",
+      incorrect: "خطأ",
       repeat: "إعادة",
       paly: " التالي",
       palyMaqam: "استمع للمقام",

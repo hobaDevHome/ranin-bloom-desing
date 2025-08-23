@@ -91,8 +91,8 @@ export default {
     },
     levelPage: {
       header: "Intro Game Excersice",
-      correct: "Correct: ",
-      incorrect: " Incorrect: ",
+      correct: "Correct",
+      incorrect: " Incorrect",
       repeat: "Repeat",
       paly: "Next Question",
       palyMaqam: "Paly Maqam",

@@ -91,8 +91,8 @@ export default {
     },
     levelPage: {
       header: "تمرین بازی مقدماتی",
-      correct: "درست: ",
-      incorrect: "نادرست: ",
+      correct: "درست",
+      incorrect: "نادرست",
       repeat: "تکرار",
       paly: "سؤال بعدی",
       palyMaqam: "اجرای مقام",
