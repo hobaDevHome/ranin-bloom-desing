@@ -79,18 +79,7 @@ type RootStackParamList = {
 };
 export default function IntroGame() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-  const getButtonStyle = (index: number): ViewStyle => {
-    const buttonStyles: Record<number, keyof typeof styles> = {
-      0: "button1",
-      1: "button2",
-      2: "button3",
-      3: "button4",
-      4: "button5",
-      5: "button6",
-    };
 
-    return styles[buttonStyles[index] || "button1"] as ViewStyle; // Ensure proper type
-  };
   const { state, dispatch } = useSettings();
 
   return (
@@ -153,7 +142,18 @@ export default function IntroGame() {
             router.push("/IntroGame/Level1");
           }}
         >
-          <View style={styles.testHeader}>
+          <View
+            style={[
+              styles.testHeader,
+              {
+                flexDirection:
+                  state.language === "ar" || state.language === "fa"
+                    ? "row-reverse"
+                    : "row",
+              },
+            ]}
+            key={index}
+          >
             <Text style={styles.testName}>
               {
                 state.labels.introGamePage.pages[
@@ -168,7 +168,17 @@ export default function IntroGame() {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.notesContainer}>
+          <View
+            style={[
+              styles.notesContainer,
+              {
+                justifyContent:
+                  state.language === "ar" || state.language === "fa"
+                    ? "flex-end"
+                    : "flex-start",
+              },
+            ]}
+          >
             {test.notes?.slice(0, 6).map((note, noteIndex) => (
               <View key={noteIndex} style={styles.noteChip}>
                 <Text style={styles.noteText}>{note}</Text>
@@ -181,9 +191,31 @@ export default function IntroGame() {
             )}
           </View>
 
-          <View style={styles.difficultyContainer}>
-            <Text style={styles.difficultyLabel}>Difficulty:</Text>
-            <View style={styles.difficultyStars}>
+          <View
+            style={[
+              styles.difficultyContainer,
+              {
+                flexDirection:
+                  state.language === "ar" || state.language === "fa"
+                    ? "row-reverse"
+                    : "row",
+              },
+            ]}
+          >
+            <Text style={styles.difficultyLabel}>
+              {state.labels.difficulty}:
+            </Text>
+            <View
+              style={[
+                styles.difficultyStars,
+                {
+                  flexDirection:
+                    state.language === "ar" || state.language === "fa"
+                      ? "row-reverse"
+                      : "row",
+                },
+              ]}
+            >
               {[...Array(5)].map((_, starIndex) => (
                 <Ionicons
                   key={starIndex}

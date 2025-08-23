@@ -18,7 +18,9 @@ export default {
   flute: "فلوت",
   goto: "برو به: ",
   home: "خانه",
+
   questionNo: "سوال شماره",
+  difficulty: "سختی",
   autoJump: "فتن خودکار به سوال بعدی",
   backToTonic: "پخش تمامی نغمات به درجه رکوز",
   chooseInstrument: "انتخاب ساز",

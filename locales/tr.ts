@@ -18,6 +18,7 @@ export default {
   flute: "flüt",
   goto: "Git: ",
   home: "Ana Sayfa",
+  difficulty: "Zorluk Seviyesi",
   questionNo: "Soru Numarası",
   backToTonic: "Tonic'e geri dön",
   autoJump: "Otomatik olarak sonraki soruya geç",

@@ -10,6 +10,7 @@ export default {
   Instrument: "Instrument",
   Preferences: "Preferences",
   Navigation: "Navigation",
+  difficulty: "Difficulty",
   oud: "oud",
   piano: "piano",
   guitar: "guitar",

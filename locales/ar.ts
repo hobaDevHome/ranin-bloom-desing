@@ -11,6 +11,7 @@ export default {
   Instrument: "الآلة",
   Preferences: "التفضيلات",
   Navigation: "القائمة",
+  difficulty: "الصعوبة",
   oud: "عود",
   piano: "بيانو",
   guitar: "جيتار",
