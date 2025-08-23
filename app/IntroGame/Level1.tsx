@@ -17,6 +17,7 @@ import { useSettings } from "../../context/SettingsContext";
 
 import { Asset } from "expo-asset";
 import { Audio } from "expo-av";
+import { Ionicons } from "@expo/vector-icons";
 
 type Level1RouteParams = {
   levelChoices: string;
@@ -392,21 +393,27 @@ const Level1 = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.score}>
-          {levelLabels.correct}{" "}
-          <Text style={{ color: "green" }}>{score.correct} </Text> |
-          {levelLabels.incorrect}{" "}
-          <Text style={{ color: "red" }}>{score.incorrect} </Text>
-        </Text>
-      </View>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.score}>
-          <Text style={{ fontSize: 18, marginBottom: 10 }}>
-            {state.labels.questionNo}: {questionNumber}
+      {/* Stats */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{score.correct}</Text>
+          <Text style={styles.statLabel}>
+            {state.labels.introGamePage.levelPage.correct}
           </Text>
-        </Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{score.incorrect}</Text>
+          <Text style={styles.statLabel}>
+            {" "}
+            {state.labels.introGamePage.levelPage.incorrect}
+          </Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{questionNumber}</Text>
+          <Text style={styles.statLabel}> {state.labels.questionNo}</Text>
+        </View>
       </View>
+
       {/* // toggle cords switch */}
       <View
         style={[
@@ -450,25 +457,30 @@ const Level1 = () => {
           ))}
         </View>
 
-        <View style={styles.playButtonsContainer}>
+        {/* Control Buttons */}
+        <View style={styles.controlsContainer}>
           <TouchableOpacity
-            style={styles.repeatButton}
+            style={[styles.controlButton, styles.playButton]}
             onPress={async () => {
               await playTone(currentTone);
             }}
             disabled={isPlaying}
           >
-            <Text style={styles.buttonText}>{levelLabels.repeat} </Text>
+            <Ionicons name="refresh" size={24} color="#FFFFFF" />
+            <Text style={styles.controlButtonText}>{levelLabels.repeat}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.repeatButton}
+            style={[styles.controlButton, styles.repeatButton]}
             onPress={async () => {
               await playMaqam();
             }}
             disabled={isPlaying}
           >
-            <Text style={styles.buttonText}>{levelLabels.palyMaqam} </Text>
+            <Ionicons name="play" size={24} color="#FFFFFF" />
+            <Text style={styles.controlButtonText}>
+              {levelLabels.palyMaqam}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -481,7 +493,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: "#fbeccb",
+    backgroundColor: "#FAFAFA",
     padding: 10,
   },
   scoreContainer: {
@@ -492,7 +504,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   leveContainer: {
-    justifyContent: "center",
+    //justifyContent: "center",
     alignItems: "center",
     flex: 1,
     padding: 20,
@@ -509,6 +521,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
+    marginTop: 40,
+    marginBottom: 20,
   },
 
   playButtonsContainer: {
@@ -518,23 +532,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexWrap: "wrap",
   },
-  repeatButton: {
-    backgroundColor: "#1bbc9b",
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    textAlign: "center",
-    marginHorizontal: 10,
-  },
-  playButton: {
-    backgroundColor: "#e35f33",
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    textAlign: "center",
-  },
+
   pickerContainer: {
     width: "100%",
     alignItems: "center",
@@ -584,7 +582,7 @@ const styles = StyleSheet.create({
   switchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 12,
+    margin: 20,
   },
   label: {
     marginRight: 10,
@@ -631,6 +629,64 @@ const styles = StyleSheet.create({
   },
   incorrectButton: {
     backgroundColor: "red",
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+  },
+  statCard: {
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#007AFF",
+  },
+  statLabel: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 4,
+  },
+  controlsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+    gap: 12,
+  },
+  controlButton: {
+    flex: 1,
+    width: 150,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 20,
+    borderRadius: 12,
+    gap: 8,
+    paddingHorizontal: 18,
+  },
+  playButton: {
+    backgroundColor: "#4CAF50",
+  },
+  nextButton: {
+    backgroundColor: "#007AFF",
+  },
+  repeatButton: {
+    backgroundColor: "#FF9500",
+  },
+  controlButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
   },
 });
 
