@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#ccc",
   },
-  selected: { backgroundColor: "#44746f" },
+  selected: { backgroundColor: "#DDA0DD" },
   selectedText: { color: "#fff" },
   unselectedText: { color: "#000" },
 });

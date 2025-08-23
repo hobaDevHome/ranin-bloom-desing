@@ -454,28 +454,38 @@ const MaqamTrainingScreen = () => {
             onPress={playExample}
             disabled={isPlaying}
           >
-            <Ionicons name="play-skip-forward" size={24} color="#FFFFFF" />
+            <Ionicons name="mic" size={24} color="#FFFFFF" />
             <Text style={styles.controlButtonText}>{lables.example}</Text>
           </TouchableOpacity>
         </View>
 
         {/* Maqam Selection Buttons */}
-        <View style={styles.maqamContainer}>
-          {selectedMaqams.map((maqam) => (
-            <OptionButton
-              key={maqam}
-              userSelection={userSelection}
-              interval={maqam}
-              currentInterval={currentMaqam}
-              handleSelection={handleSelection}
-              isAnswered={isAnswered}
-              label={
-                state.language === "en"
-                  ? maqam
-                  : maqamsListFromLacale[maqam as Maqam]
-              }
-            />
-          ))}
+
+        <View style={styles.maqamatContainer}>
+          <View style={styles.maqamatGrid}>
+            {selectedMaqams.map((maqam) => {
+              return (
+                <TouchableOpacity
+                  key={maqam}
+                  style={[
+                    styles.maqamButton,
+                    userSelection === maqam &&
+                      (maqam === currentMaqam
+                        ? styles.maqamButtonCorrect
+                        : styles.maqamButtonWrong),
+                  ]}
+                  onPress={() => handleSelection(maqam)}
+                  disabled={isAnswered}
+                >
+                  <Text style={styles.maqamName}>
+                    {state.language === "en"
+                      ? maqam
+                      : maqamsListFromLacale[maqam as Maqam]}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
         </View>
 
         {/* Settings Button */}
@@ -580,7 +590,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
   },
-  maqamButton: {
+  maqamButton1: {
     backgroundColor: "#E0E0E0",
     padding: 10,
     borderRadius: 5,
@@ -596,7 +606,7 @@ const styles = StyleSheet.create({
     maxWidth: Platform.OS === "web" ? 400 : "100%",
   },
   modalContent: {
-    backgroundColor: "#fbedd3",
+    backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,
     width: "80%",
@@ -627,7 +637,7 @@ const styles = StyleSheet.create({
     right: 15,
     width: 30,
     height: 30,
-    backgroundColor: "#376863",
+    backgroundColor: "#45B7D1",
     borderRadius: 15,
     padding: 5,
     justifyContent: "center",
@@ -781,6 +791,59 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "600",
+  },
+  maqamatContainer: {
+    paddingBottom: 20,
+    marginTop: 30,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 16,
+  },
+  maqamatGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  maqamButton: {
+    width: "47%",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  maqamButtonSelected: {
+    borderColor: "#007AFF",
+    backgroundColor: "#E3F2FD",
+  },
+  maqamButtonCorrect: {
+    borderColor: "#4CAF50",
+    backgroundColor: "#E8F5E8",
+  },
+  maqamButtonWrong: {
+    borderColor: "#F44336",
+    backgroundColor: "#FFEBEE",
+  },
+  maqamName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 4,
+  },
+  maqamNameArabic: {
+    fontSize: 14,
+    color: "#666",
+    marginBottom: 8,
   },
 });
 
