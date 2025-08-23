@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Image,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -355,89 +356,107 @@ const IntervalTrainingScreen = () => {
   };
 
   return (
-    <ImageBackground
-      source={require("../assets/images/intervals_bg.png")}
-      resizeMode="cover"
-      style={styles.background}
-    >
-      <ScrollView contentContainerStyle={styles.container}>
-        <View
-          style={[
-            styles.selectedInstCont,
-            { direction: state.language === "ar" ? "rtl" : "ltr" },
-          ]}
-        >
-          <Text style={styles.buttonText}>{lables.selectedInstrumnet}</Text>
-          <Image
-            source={instrumentImages[state.instrument]}
-            style={styles.instIcon}
-          />
-        </View>
-        <Text style={styles.title}>{lables.title}</Text>
-        <View style={styles.scoreContainer}>
-          {/* <Text style={styles.questionNumber}>{questionNumber}/10</Text> */}
-          <Text style={styles.score}>
-            {state.labels.introGamePage.levelPage.correct}{" "}
-            <Text style={{ color: "green" }}>{score.correct} </Text> |
-            {state.labels.introGamePage.levelPage.incorrect}{" "}
-            <Text style={{ color: "red" }}>{score.incorrect} </Text>
-          </Text>
-          <Text style={{ fontSize: 18, marginBottom: 10 }}>
-            {state.labels.questionNo}: {questionNumber}
-          </Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {/* <Text style={styles.title}>{lables.title}</Text> */}
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{score.correct}</Text>
+            <Text style={styles.statLabel}>
+              {state.labels.introGamePage.levelPage.correct}
+            </Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{score.incorrect}</Text>
+            <Text style={styles.statLabel}>
+              {" "}
+              {state.labels.introGamePage.levelPage.incorrect}
+            </Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>{questionNumber}</Text>
+            <Text style={styles.statLabel}> {state.labels.questionNo}</Text>
+          </View>
         </View>
 
-        <View style={styles.playButtonContiner}>
-          <PlayButton
-            isPlaying={isPlaying}
-            label={lables.playInterval}
-            playInterval={handlePlayInterval}
-          />
-          <RepeatButton
-            isPlaying={isPlaying}
-            label={lables.repeatButton}
-            repeatInterval={repeatInterval}
-          />
-        </View>
-
-        <View style={styles.intervalContainer}>
-          {selectedIntervals.map((interval) => (
-            <OptionButton
-              key={interval}
-              userSelection={userSelection}
-              interval={interval}
-              label={
-                intervalsListFromLacale[
-                  interval as keyof typeof intervalsListFromLacale
-                ]
-              }
-              currentInterval={currentInterval}
-              handleSelection={handleSelection}
-              isAnswered={isAnswered}
+        {/* Control Buttons */}
+        <View style={styles.controlsContainer}>
+          <TouchableOpacity
+            style={[styles.controlButton, styles.playButton]}
+            onPress={handlePlayInterval}
+            disabled={isPlaying}
+          >
+            <Ionicons
+              name={isPlaying ? "hourglass-outline" : "play"}
+              size={24}
+              color="#FFFFFF"
             />
-          ))}
+            <Text style={styles.controlButtonText}>{lables.playInterval}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.controlButton, styles.repeatButton]}
+            onPress={repeatInterval}
+            disabled={isPlaying}
+          >
+            <Ionicons name="refresh" size={24} color="#FFFFFF" />
+            <Text style={styles.controlButtonText}>{lables.repeatButton}</Text>
+          </TouchableOpacity>
         </View>
+
+        {/* intervlas Selection Buttons */}
+
+        <View style={styles.maqamatContainer}>
+          <View style={styles.maqamatGrid}>
+            {selectedIntervals.map((interval) => {
+              return (
+                <TouchableOpacity
+                  key={interval}
+                  style={[
+                    styles.maqamButton,
+                    userSelection === interval &&
+                      (interval === currentInterval
+                        ? styles.maqamButtonCorrect
+                        : styles.maqamButtonWrong),
+                  ]}
+                  onPress={() => handleSelection(interval)}
+                  disabled={isAnswered}
+                >
+                  <Text style={styles.maqamName}>
+                    {state.language === "en"
+                      ? interval
+                      : intervalsListFromLacale[
+                          interval as keyof typeof intervalsListFromLacale
+                        ]}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+
+        {/* Settings Button */}
 
         <View style={styles.settingsBtCont}>
           <TouchableOpacity
-            style={styles.repeatButton}
+            style={[styles.controlButton, styles.settingsButtonBG]}
             onPress={() => setModalVisible(true)}
           >
             <View style={styles.settingsBtnContainer}>
-              <Ionicons name="settings-outline" size={16} color="black" />
-              <Text style={styles.buttonText}>{lables.settings}</Text>
+              <Ionicons
+                name="settings-outline"
+                size={24}
+                color="#FFFFFF"
+                style={{ marginRight: 5 }}
+              />
+              <Text style={styles.controlButtonText}>{lables.settings}</Text>
             </View>
           </TouchableOpacity>
         </View>
 
-        {/* {showAnswer && (
-          <Text style={styles.buttonText}>
-            {state.labels.correctAnswer}
-            {state.language === "en"
-              ? currentInterval
-              : intervalMap[currentInterval as keyof typeof intervalMap]}
-          </Text>
-        )} */}
+        {/* Modal for Settings */}
         <Modal visible={modalVisible} transparent animationType="slide">
           <TouchableWithoutFeedback onPress={toggleModal}>
             <View style={styles.modalContainer}>
@@ -477,18 +496,21 @@ const IntervalTrainingScreen = () => {
           </TouchableWithoutFeedback>
         </Modal>
       </ScrollView>
-    </ImageBackground>
+    </SafeAreaView>
   );
 };
 
 // Styles
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    flexGrow: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+    flex: 1,
+    backgroundColor: "#FAFAFA",
   },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+
   modalTitle: {
     fontSize: 20,
     fontWeight: "bold",
@@ -568,26 +590,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "#5c3829",
   },
-  playButton: {
-    backgroundColor: "#f3b7ad",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    marginBottom: 10,
-  },
-  repeatButton: {
-    backgroundColor: "#80cdc7",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    marginBottom: 10,
-  },
-  nextButton: {
-    backgroundColor: "#FF9500",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-  },
 
   intervalContainer: {
     flexDirection: "row",
@@ -662,6 +664,118 @@ const styles = StyleSheet.create({
   score: {
     fontSize: 18,
     marginBottom: 20,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+  },
+  statCard: {
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#007AFF",
+  },
+  statLabel: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 4,
+  },
+  controlsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+    gap: 12,
+  },
+  controlButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    borderRadius: 12,
+    gap: 8,
+  },
+  playButton: {
+    backgroundColor: "#4CAF50",
+  },
+  nextButton: {
+    backgroundColor: "#007AFF",
+  },
+  repeatButton: {
+    backgroundColor: "#FF9500",
+  },
+  settingsButtonBG: {
+    backgroundColor: "#45B7D1",
+  },
+  controlButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  maqamatContainer: {
+    paddingBottom: 20,
+    marginTop: 30,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 16,
+  },
+  maqamatGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  maqamButton: {
+    width: "47%",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  maqamButtonSelected: {
+    borderColor: "#007AFF",
+    backgroundColor: "#E3F2FD",
+  },
+  maqamButtonCorrect: {
+    borderColor: "#4CAF50",
+    backgroundColor: "#E8F5E8",
+  },
+  maqamButtonWrong: {
+    borderColor: "#F44336",
+    backgroundColor: "#FFEBEE",
+  },
+  maqamName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 4,
+  },
+  maqamNameArabic: {
+    fontSize: 14,
+    color: "#666",
+    marginBottom: 8,
   },
 });
 
