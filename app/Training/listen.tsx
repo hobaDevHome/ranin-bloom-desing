@@ -21,6 +21,7 @@ import { Asset } from "expo-asset";
 
 import { Audio } from "expo-av";
 import MaqamTrainingScreen from "../maqamat";
+import { Ionicons } from "@expo/vector-icons";
 
 type PlayScreenParams = {
   id: string;
@@ -332,6 +333,18 @@ const TrainingListen = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.leveContainer}>
+        <View style={styles.intro}>
+          <Ionicons
+            name="musical-notes"
+            size={32}
+            color="#45b7d1"
+            style={{ marginBottom: 5 }}
+          />
+
+          <Text style={styles.activitySubtitle}>
+            {state.labels.basicTrainingPages.basicTrainingLevel.listenMsg}
+          </Text>
+        </View>
         <View style={styles.buttonsContainer}>
           {cadence.map((tone: string, i: number) => (
             <TouchableOpacity key={tone} style={[styles.toneButton]} disabled>
@@ -358,8 +371,6 @@ const TrainingListen = () => {
         <Text style={styles.feedbackText}>
           {state.labels.basicTrainingPages.basicTrainingLevel.listenMsg}
         </Text>
-
-        <View style={styles.playButtonsContainer}></View>
       </View>
     </View>
   );
@@ -370,7 +381,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: "#fbeccb",
+    backgroundColor: "#FAFAFA",
     padding: 10,
   },
   scoreContainer: {
@@ -381,7 +392,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   leveContainer: {
-    justifyContent: "center",
+    //   justifyContent: "center",
     alignItems: "center",
     flex: 1,
     padding: 20,
@@ -505,6 +516,39 @@ const styles = StyleSheet.create({
   },
   incorrectButton: {
     backgroundColor: "red",
+  },
+  intro: {
+    padding: 20,
+    width: 300,
+    height: 180,
+    marginBottom: 70,
+    marginTop: 20,
+    borderRadius: 15,
+
+    justifyContent: "center",
+    alignItems: "center",
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  activityTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333333",
+    textAlign: "center",
+    marginBottom: 4,
+  },
+  activitySubtitle: {
+    fontSize: 14,
+    color: "#6f6f6f",
+    textAlign: "center",
+    opacity: 0.9,
   },
 });
 
