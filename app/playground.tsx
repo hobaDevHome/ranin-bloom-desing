@@ -79,10 +79,14 @@ const pianoLayout = [
 ];
 type PlaygroundScreenProps = {
   onKeyPress?: (note: string) => void;
+  showIntro?: boolean;
 };
 const whiteKeysCount = pianoLayout.filter((key) => key.type === "white").length;
 
-const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({ onKeyPress }) => {
+const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({
+  onKeyPress,
+  showIntro = true,
+}) => {
   const { state } = useSettings();
   const [quarterToneToggles, setQuarterToneToggles] = useState<
     Record<string, boolean>
@@ -181,20 +185,23 @@ const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({ onKeyPress }) => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.intro}>
-        <Ionicons
-          name="musical-notes"
-          size={32}
-          color="#45b7d1"
-          style={{ marginBottom: 5 }}
-        />
-        <Text style={styles.activityTitle}>
-          {state.labels.playGroundPage.express}
-        </Text>
-        <Text style={styles.activitySubtitle}>
-          {state.labels.playGroundPage.intro}
-        </Text>
-      </View>
+      {showIntro && (
+        <View style={styles.intro}>
+          <Ionicons
+            name="musical-notes"
+            size={32}
+            color="#45b7d1"
+            style={{ marginBottom: 5 }}
+          />
+          <Text style={styles.activityTitle}>
+            {state.labels.playGroundPage.express}
+          </Text>
+          <Text style={styles.activitySubtitle}>
+            {state.labels.playGroundPage.intro}
+          </Text>
+        </View>
+      )}
+
       {/* Toggle buttons container */}
       <View style={styles.toggleContainer}>
         <View style={styles.toggleRow}>

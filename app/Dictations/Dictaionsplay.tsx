@@ -392,7 +392,8 @@ const DictaionsPlay = () => {
       </View>
 
       {/* pino component */}
-      <PlaygroundScreen onKeyPress={handlePianoKeyPress} />
+
+      <PlaygroundScreen onKeyPress={handlePianoKeyPress} showIntro={false} />
 
       {/* Buttons Area */}
       <View style={styles.leveContainer}>
@@ -447,7 +448,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     // justifyContent: "space-between", // Adjusted for better layout
-    backgroundColor: "#fbeccb",
+    backgroundColor: "#FAFAFA",
     padding: 10,
   },
   feedbackContainer: {
