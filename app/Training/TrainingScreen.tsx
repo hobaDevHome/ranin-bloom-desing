@@ -46,9 +46,6 @@ const TrainingScreen = () => {
         {trainingLevelLables.describtion} :
         {state.labels.basicTrainingPages.basicTrainingHome[scale as Maqam]}
       </Text>
-      {/* <Text style={styles.subTitle}>
-        {trainingLevelLables.section} : {currentSection.toString()}
-      </Text> */}
 
       <View style={styles.playButtonContiner}>
         <TouchableOpacity
@@ -111,6 +108,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "flex-start",
     alignItems: "center",
+    backgroundColor: "#FAFAFA",
   },
 
   buttonText: {
@@ -120,15 +118,20 @@ const styles = StyleSheet.create({
   },
 
   playButtonContiner: {
-    width: "70%",
+    width: "100%",
     marginTop: 20,
+    paddingHorizontal: 24,
+    alignItems: "center",
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#333",
     marginBottom: 10,
-    marginTop: 20,
-    color: "#5c3829",
+    marginTop: 18,
+    textAlign: "left",
+
+    marginLeft: 24,
   },
   subTitle: {
     fontSize: 18,
