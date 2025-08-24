@@ -348,6 +348,7 @@ const DictaionsPlay = () => {
 
   return (
     <View style={styles.mainContainer}>
+      {/* // Title and Score Area */}
       <View style={styles.tilteContainer}>
         <Text style={styles.title}>
           {state.labels.dictations.description} :{" "}
@@ -358,14 +359,28 @@ const DictaionsPlay = () => {
           }
         </Text>
       </View>
-      <View style={styles.scoreContainer}>
-        {/* <Text style={styles.questionNumber}>{questionNumber}/10</Text> */}
-        <Text style={styles.score}>
-          {levelLabels.correct}{" "}
-          <Text style={{ color: "green" }}>{score.correct} </Text> |
-          {levelLabels.incorrect}{" "}
-          <Text style={{ color: "red" }}>{score.incorrect} </Text>
-        </Text>
+
+      {/* Stats */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{score.correct}</Text>
+          <Text style={styles.statLabel}>
+            {state.labels.introGamePage.levelPage.correct}
+          </Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{score.incorrect}</Text>
+          <Text style={styles.statLabel}>
+            {" "}
+            {state.labels.introGamePage.levelPage.incorrect}
+          </Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>
+            {score.correct + score.incorrect + 1}
+          </Text>
+          <Text style={styles.statLabel}> {state.labels.questionNo}</Text>
+        </View>
       </View>
 
       {/* Icons and Correct Notes Display */}
@@ -396,47 +411,51 @@ const DictaionsPlay = () => {
       <PlaygroundScreen onKeyPress={handlePianoKeyPress} showIntro={false} />
 
       {/* Buttons Area */}
-      <View style={styles.leveContainer}>
-        {/* <View style={styles.buttonsContainer}>
-          {cadence.map((tone, i) => (
-            <TouchableOpacity
-              key={tone + i} // Use index for more stable key if tones can repeat
-              style={[styles.toneButton]}
-              onPress={() => handleGuess(tone)} // Pass the original case note name
-              disabled={isPlaying || clicksMade >= 4} // Disable after 4 clicks or during playback
-            >
-              <Text style={styles.toneButtonText}>
-                {getNoteDisplayName(tone)}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View> */}
-        <View style={styles.playButtonsContainer}>
-          <TouchableOpacity
-            style={styles.playButton}
-            onPress={playRandomNotes}
-            disabled={isPlaying}
-          >
-            <Text style={styles.buttonText}>{levelLabels.paly}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.repeatButton}
-            onPress={repeatRandomNotes}
-            disabled={isPlaying || randomNotes.length === 0}
-          >
-            <Text style={styles.buttonText}>{levelLabels.repeat}</Text>
-          </TouchableOpacity>
-          {/* Optional: Keep Maqam play button if needed */}
-          <TouchableOpacity
-            style={styles.repeatButton}
-            onPress={playMaqam}
-            disabled={isPlaying}
-          >
-            <Text style={styles.buttonText}>
-              {state.labels.maqamatTraingingPage.playMaqam}
-            </Text>
-          </TouchableOpacity>
-        </View>
+
+      {/* Control Buttons */}
+      <View style={styles.controlsContainer}>
+        <TouchableOpacity
+          style={[styles.controlButton, styles.nextButton]}
+          onPress={playRandomNotes}
+          disabled={isPlaying}
+        >
+          <Ionicons
+            name="play"
+            size={24}
+            color="#FFFFFF"
+            style={{ marginRight: 5 }}
+          />
+          <Text style={styles.controlButtonText}>{levelLabels.paly}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.controlButton, styles.playButton]}
+          onPress={repeatRandomNotes}
+          disabled={isPlaying}
+        >
+          <Ionicons
+            name="refresh"
+            size={24}
+            color="#FFFFFF"
+            style={{ marginRight: 5 }}
+          />
+          <Text style={styles.controlButtonText}>{levelLabels.repeat}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.controlButton, styles.repeatButton]}
+          onPress={playMaqam}
+          disabled={isPlaying}
+        >
+          <Ionicons
+            name="musical-notes"
+            size={24}
+            color="#FFFFFF"
+            style={{ marginRight: 5 }}
+          />
+          <Text style={styles.controlButtonText}>
+            {state.labels.maqamatTraingingPage.playMaqam}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -508,22 +527,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexWrap: "wrap",
   },
-  repeatButton: {
-    backgroundColor: "#1bbc9b",
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  playButton: {
-    backgroundColor: "#e35f33",
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    textAlign: "center",
-  },
+
   buttonText: {
     color: "#fff",
     textAlign: "center",
@@ -551,15 +555,88 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   tilteContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#3bd3b4",
-    padding: 10,
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    position: "relative",
+    backgroundColor: "#4ECDC4",
     width: "70%",
     alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
+
   title: {
     fontSize: 16,
+    color: "#fff",
+    fontWeight: "600",
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+  },
+  statCard: {
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#007AFF",
+  },
+  statLabel: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 4,
+  },
+  controlsContainer: {
+    flexDirection: "row",
+    padding: 20,
+    gap: 12,
+    flexWrap: "wrap",
+    width: "90%",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  controlButton: {
+    width: 120,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    borderRadius: 12,
+    paddingHorizontal: 24,
+  },
+  playButton: {
+    backgroundColor: "#4CAF50",
+  },
+  nextButton: {
+    backgroundColor: "#007AFF",
+  },
+  repeatButton: {
+    backgroundColor: "#FF9500",
+  },
+  controlButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
   },
   // Styles like scoreContainer, questionNumber, score, dimmed, picker, pickerItem, musicalIcon, greenRectangle were either unused or replaced/modified above.
 });

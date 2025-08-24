@@ -381,7 +381,6 @@ const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
     // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FAFAFA",
@@ -392,7 +391,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     alignSelf: "center",
     overflow: "visible",
-    marginTop: 50,
+    //  marginTop: 50,
   },
   whiteKey: {
     backgroundColor: "#ffffff",
