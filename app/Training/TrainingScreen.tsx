@@ -10,7 +10,7 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { router, useNavigation } from "expo-router";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useSettings } from "@/context/SettingsContext";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Foundation from "@expo/vector-icons/Foundation";
 import { Maqam } from "@/constants/scales";
@@ -52,7 +52,7 @@ const TrainingScreen = () => {
 
       <View style={styles.playButtonContiner}>
         <TouchableOpacity
-          style={styles.playButton}
+          style={[styles.activityCard, styles.button1]}
           onPress={() =>
             router.push({
               pathname: "/Training/play",
@@ -64,17 +64,20 @@ const TrainingScreen = () => {
               },
             })
           }
+          activeOpacity={0.8}
         >
-          <AntDesign
-            name="playcircleo"
-            size={24}
-            color="black"
-            style={styles.buttonIcon}
-          />
-          <Text>{trainingLevelLables.play}</Text>
+          <View
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
+          >
+            <AntDesign name="playcircleo" size={30} color="#fff" />
+          </View>
+          <Text style={styles.activityTitle}>{trainingLevelLables.play}</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.listenButton}
+          style={[styles.activityCard, styles.button2]}
           onPress={() =>
             router.push({
               pathname: "/Training/listen",
@@ -87,13 +90,15 @@ const TrainingScreen = () => {
             })
           }
         >
-          <AntDesign
-            name="sound"
-            size={24}
-            color="black"
-            style={styles.buttonIcon}
-          />
-          <Text>{trainingLevelLables.listen}</Text>
+          <View
+            style={{
+              flexDirection: state.language === "ar" ? "row-reverse" : "row",
+              marginBottom: 12,
+            }}
+          >
+            <AntDesign name="sound" size={24} color="#fff" />
+          </View>
+          <Text style={styles.activityTitle}>{trainingLevelLables.listen}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -155,6 +160,49 @@ const styles = StyleSheet.create({
   buttonIcon: {
     fontSize: 20,
     marginRight: 10,
+  },
+  activityCard: {
+    width: "47%",
+    aspectRatio: 1,
+    borderRadius: 20,
+    padding: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    marginBottom: 12,
+  },
+  iconContainer: {
+    marginBottom: 12,
+  },
+  activityTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    marginBottom: 4,
+  },
+  activitySubtitle: {
+    fontSize: 12,
+    color: "#FFFFFF",
+    textAlign: "center",
+    opacity: 0.9,
+  },
+  buttonContent: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button1: {
+    backgroundColor: "#FF6B6B",
+  },
+  button2: {
+    backgroundColor: "#4ECDC4",
   },
 });
 
