@@ -20,6 +20,7 @@ import { useSettings } from "@/context/SettingsContext";
 import { Asset } from "expo-asset";
 import { Audio } from "expo-av";
 import MaqamTrainingScreen from "../maqamat";
+import { Ionicons } from "@expo/vector-icons";
 
 type PlayScreenParams = {
   id: string;
@@ -369,21 +370,27 @@ const TrainingPlay = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.score}>
-          {levelLabels.correct}{" "}
-          <Text style={{ color: "green" }}>{score.correct} </Text> |
-          {levelLabels.incorrect}{" "}
-          <Text style={{ color: "red" }}>{score.incorrect} </Text>
-        </Text>
-      </View>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.score}>
-          <Text style={{ fontSize: 18, marginBottom: 10 }}>
-            {state.labels.questionNo}: {questionNumber}
+      {/* Stats */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{score.correct}</Text>
+          <Text style={styles.statLabel}>
+            {state.labels.introGamePage.levelPage.correct}
           </Text>
-        </Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{score.incorrect}</Text>
+          <Text style={styles.statLabel}>
+            {" "}
+            {state.labels.introGamePage.levelPage.incorrect}
+          </Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{questionNumber}</Text>
+          <Text style={styles.statLabel}> {state.labels.questionNo}</Text>
+        </View>
       </View>
+
       <View
         style={[
           styles.switchContainer,
@@ -398,6 +405,7 @@ const TrainingPlay = () => {
         />
         <Text style={styles.label}>{levelLabels.playchords}</Text>
       </View>
+
       <View style={styles.leveContainer}>
         <View style={styles.buttonsContainer}>
           {cadence.map((tone: string, i: number) => (
@@ -431,34 +439,55 @@ const TrainingPlay = () => {
         {feedbackMessage !== "" && (
           <Text style={styles.feedbackText}>{feedbackMessage}</Text>
         )}
-        <View style={styles.playButtonsContainer}>
+
+        {/* Control Buttons */}
+        <View style={styles.controlsContainer}>
           <TouchableOpacity
-            style={styles.playButton}
+            style={[styles.controlButton, styles.nextButton]}
             onPress={async () => {
               await playRandomTone();
             }}
             disabled={isPlaying}
           >
-            <Text style={styles.buttonText}>{levelLabels.paly} </Text>
+            <Ionicons
+              name="play"
+              size={24}
+              color="#FFFFFF"
+              style={{ marginRight: 5 }}
+            />
+            <Text style={styles.controlButtonText}>{levelLabels.paly}</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.repeatButton}
+            style={[styles.controlButton, styles.playButton]}
             onPress={async () => {
               await playTone(currentTone);
             }}
             disabled={isPlaying}
           >
-            <Text style={styles.buttonText}>{levelLabels.repeat} </Text>
+            <Ionicons
+              name="refresh"
+              size={24}
+              color="#FFFFFF"
+              style={{ marginRight: 5 }}
+            />
+            <Text style={styles.controlButtonText}>{levelLabels.repeat}</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
-            style={styles.repeatButton}
+            style={[styles.controlButton, styles.repeatButton]}
             onPress={async () => {
               await playMaqam();
             }}
             disabled={isPlaying}
           >
-            <Text style={styles.buttonText}>
-              {state.labels.maqamatTraingingPage.playMaqam}{" "}
+            <Ionicons
+              name="musical-notes"
+              size={24}
+              color="#FFFFFF"
+              style={{ marginRight: 5 }}
+            />
+            <Text style={styles.controlButtonText}>
+              {state.labels.maqamatTraingingPage.playMaqam}
             </Text>
           </TouchableOpacity>
         </View>
@@ -472,7 +501,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: "#fbeccb",
+    backgroundColor: "#FAFAFA",
     padding: 10,
   },
   scoreContainer: {
@@ -483,7 +512,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   leveContainer: {
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     flex: 1,
     padding: 20,
@@ -500,31 +529,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
+    marginTop: 40,
+    marginBottom: 20,
   },
 
   playButtonsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "70%",
+    width: "100%",
     paddingHorizontal: 10,
     flexWrap: "wrap",
   },
-  repeatButton: {
-    backgroundColor: "#1bbc9b",
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  playButton: {
-    backgroundColor: "#e35f33",
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-    textAlign: "center",
-  },
+
   pickerContainer: {
     width: "100%",
     alignItems: "center",
@@ -595,7 +611,7 @@ const styles = StyleSheet.create({
   switchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 12,
+    margin: 20,
   },
   label: {
     marginRight: 10,
@@ -607,6 +623,64 @@ const styles = StyleSheet.create({
   },
   incorrectButton: {
     backgroundColor: "red",
+  },
+  controlsContainer: {
+    flexDirection: "row",
+    padding: 20,
+    gap: 12,
+    flexWrap: "wrap",
+    width: "90%",
+    justifyContent: "center",
+  },
+  controlButton: {
+    width: 120,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    borderRadius: 12,
+    paddingHorizontal: 24,
+  },
+  playButton: {
+    backgroundColor: "#4CAF50",
+  },
+  nextButton: {
+    backgroundColor: "#007AFF",
+  },
+  repeatButton: {
+    backgroundColor: "#FF9500",
+  },
+  controlButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  statsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 20,
+  },
+  statCard: {
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#007AFF",
+  },
+  statLabel: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 4,
   },
 });
 
