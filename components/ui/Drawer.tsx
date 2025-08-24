@@ -198,7 +198,7 @@ function CustomDrawerContent() {
 
         <View style={styles.settingRow}>
           <View style={styles.settingInfo}>
-            <Foundation name="next" size={20} color="#666" />
+            <Foundation name="next" size={18} color="#666" />
             <Text style={styles.settingLabel}>{state.labels.autoJump}</Text>
           </View>
           <Switch
@@ -211,7 +211,7 @@ function CustomDrawerContent() {
 
         <View style={styles.settingRow}>
           <View style={styles.settingInfo}>
-            <Ionicons name="return-up-back" size={20} color="#666" />
+            <Ionicons name="return-up-back" size={18} color="#666" />
 
             <Text style={styles.settingLabel}>{state.labels.backToTonic}</Text>
           </View>
@@ -245,7 +245,7 @@ function CustomDrawerContent() {
 
 export default CustomDrawerContent;
 const styles = StyleSheet.create({
-  mobileContainer: { flex: 1, width: 400, justifyContent: "center" },
+  mobileContainer: { flex: 1, width: 500, justifyContent: "center" },
   switchContainer: { marginTop: 10, flexDirection: "row" },
   switch: { marginHorizontal: 10 },
   instContianer: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    padding: 20,
+    padding: 10,
   },
   header: {
     flexDirection: "row",
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   settingLabel: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#333",
     marginLeft: 12,
   },

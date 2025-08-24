@@ -507,7 +507,7 @@ const styles = StyleSheet.create({
     //justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    padding: 20,
+    padding: 10,
   },
   questionNumber: {
     fontSize: 18,

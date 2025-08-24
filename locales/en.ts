@@ -21,7 +21,7 @@ export default {
   home: "Home",
   questionNo: "Question No.",
   autoJump: "Auto Move to next question",
-  backToTonic: "Play all the tones back to tonic",
+  backToTonic: "Play tones back to tonic",
   chooseInstrument: "Choose Instrument",
   melodicDictations: "Dictations",
   intervals: "Intervals",

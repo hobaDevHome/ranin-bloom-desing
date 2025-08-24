@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
     //   justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    padding: 20,
+    padding: 10,
   },
   questionNumber: {
     fontSize: 18,
@@ -523,18 +523,14 @@ const styles = StyleSheet.create({
     height: 180,
     marginBottom: 70,
     marginTop: 20,
-    borderRadius: 15,
 
     justifyContent: "center",
     alignItems: "center",
 
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
     elevation: 4,
   },
   activityTitle: {

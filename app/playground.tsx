@@ -479,18 +479,14 @@ const styles = StyleSheet.create({
     height: 180,
     marginBottom: 100,
     marginTop: 50,
-    borderRadius: 15,
 
     justifyContent: "center",
     alignItems: "center",
 
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
     elevation: 4,
   },
   activityTitle: {
