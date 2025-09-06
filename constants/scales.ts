@@ -9,33 +9,6 @@ export type Maqam =
   | "Hegaz"
   | "Kurd";
 
-// export const scales = {
-//   "C Major": {
-//     Do: 261.63, // C4
-//     Re: 293.66, // D4
-//     Mi: 329.63, // E4
-//     Fa: 349.23, // F4
-//     Sol: 392.0, // G4
-//     La: 440.0, // A4
-//     Si: 493.88, // B4
-//     Doo: 523.25, //C5
-//   },
-//   "Rast": {
-//     Do: 261.63, // C4
-//     Re: 293.66, // D4
-//     Mi: 320.38, // E4 3/4
-//     Fa: 349.23, // F4
-//     Sol: 392.0, // G4
-//     La: 440.0, // A4
-//     Si: 480.02, // B4
-//     Doo: 523.25, //C5
-//   },
-// };
-
-// export const scaleMap = {
-//   "C Major": "سلم دو الكبير",
-//   Rast: "راست",
-// };
 export const keysMap = {
   Do: "دو",
   Re: "ري",
@@ -109,14 +82,14 @@ export const scalesLists = {
 };
 
 export const maqamsScaleLists = {
-  Saba: ["Saba_0", "Saba_1"],
-  Nahawand: ["Nahawand_0", "Nahawand_1"],
-  Agam: ["Agam_0", "Agam_1"],
-  Bayaty: ["Bayaty_0", "Bayaty_1"],
-  Sika: ["Sika_0", "Sika_1"],
-  Hegaz: ["Hegaz_0", "Hegaz_1"],
-  Rast: ["Rast_0", "Rast_1"],
-  Kurd: ["Kurd_0", "Kurd_1"],
+  Saba: ["Saba_0"],
+  Nahawand: ["Nahawand_0"],
+  Agam: ["Agam_0"],
+  Bayaty: ["Bayaty_0"],
+  Sika: ["Sika_0"],
+  Hegaz: ["Hegaz_0"],
+  Rast: ["Rast_0"],
+  Kurd: ["Kurd_0"],
 };
 
 export const maqamsExamplesLists = {
