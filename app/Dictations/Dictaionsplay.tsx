@@ -198,6 +198,17 @@ const DictaionsPlay = () => {
     setClicksMade(0);
     setRandomNotes([]); // Clear previous notes first
 
+    const currentMaqamList = scalesListsForDictation[selectedScale as Maqam];
+    let selectedRandomSequence =
+      currentMaqamList[Math.floor(Math.random() * currentMaqamList.length)];
+    let currentNotes = selectedRandomSequence.notes;
+    let currentSound = selectedRandomSequence.name;
+
+    setRandomNotes(currentNotes);
+    setRandomSound(currentSound);
+    await playTone(currentSound);
+    console.log(currentSound);
+
     const filteredCadence = cadence.filter(
       (note) => note !== "rii_b" && note !== "rii"
     );
@@ -213,17 +224,6 @@ const DictaionsPlay = () => {
 
     /////////////////////////////////////////////////////
     // get notes from pre recoreded sequence in dictaion list
-
-    const currentMaqamList = scalesListsForDictation[selectedScale as Maqam];
-    let selectedRandomSequence =
-      currentMaqamList[Math.floor(Math.random() * currentMaqamList.length)];
-    let currentNotes = selectedRandomSequence.notes;
-    let currentSound = selectedRandomSequence.name;
-
-    setRandomNotes(currentNotes);
-    setRandomSound(currentSound);
-    await playTone(currentSound);
-    console.log(currentSound);
 
     /////////////// another random sequence  but arround some pattern///////////////
     // const startIndex = Math.floor(Math.random() * (filteredCadence.length - 4)); // عشان يفضل فيه نغمات حوالينها
