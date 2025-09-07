@@ -16,7 +16,10 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useSettings } from "@/context/SettingsContext";
 import { Asset } from "expo-asset";
 import { Audio } from "expo-av";
-import { scalesListsForDictation } from "../../constants/DictationLists";
+import {
+  scalesListsForDictation,
+  maqamPivots,
+} from "../../constants/DictationLists";
 import PlaygroundScreen from "../playground";
 
 type PlayScreenParams = {
@@ -103,7 +106,7 @@ const DictaionsPlay = () => {
 
   const levelLabels = state.labels.introGamePage.levelPage;
   const cadence = scalesLists[selectedScale as Maqam];
-
+  const maxStep = 1;
   // Helper to get display name based on settings
   const getNoteDisplayName = (note: string): string => {
     const keyIndex = cadence.findIndex(
@@ -214,11 +217,11 @@ const DictaionsPlay = () => {
     setRandomSound(currentSound);
     //  play pre recorded sounds
     // ====================================
-    await playTone(currentSound);
+    //await playTone(currentSound);
 
     /////////////////////////////////////////////////////
     // get notes from pre recoreded sequence in dictaion list
-    console.log("cadence", cadence);
+
     /////////////// another random sequence but around some pattern ///////////////
     const startIndex = Math.floor(Math.random() * (cadence.length - 4));
     let currentIndex = startIndex;
@@ -250,8 +253,61 @@ const DictaionsPlay = () => {
     // play sequence randomly generated
     // نغمات عشواية من نغمات المقام بحيث لا تتكرر النغمة اكتر من مرتين ف الجملة وماتكونش المسافات بينهم اكتر من تون واحد
     console.log(phrase);
-    setRandomNotes(phrase);
-    await playSequence(phrase);
+    //setRandomNotes(phrase);
+    //await playSequence(phrase);
+
+    // ========= باستخدام ركووزات المقامات =======================
+    const pivots = maqamPivots[selectedScale] || [];
+    if (!currentMaqamList || currentMaqamList.length < 4) {
+      console.warn("Selected scale is not valid or too short.");
+      return;
+    }
+
+    const countNote2 = (arr: string[], note: string): number =>
+      arr.filter((n) => n === note).length;
+
+    const phrase2: string[] = [];
+
+    let currentIndex2: number;
+    // 1. Start from a pivot note if possible, otherwise choose a random note
+    const pivotNote = pivots[Math.floor(Math.random() * pivots.length)];
+    if (pivotNote && cadence.includes(pivotNote)) {
+      currentIndex2 = cadence.indexOf(pivotNote);
+    } else {
+      currentIndex2 = Math.floor(Math.random() * cadence.length);
+    }
+    phrase2.push(cadence[currentIndex2]);
+
+    console.log(phrase2);
+
+    // 2. Build the rest of the phrase
+    for (let i = 1; i < 4; i++) {
+      let nextNote: string;
+      let attempts = 0;
+
+      do {
+        const step = Math.floor(Math.random() * (2 * maxStep + 1)) - maxStep;
+        currentIndex2 = Math.min(
+          Math.max(currentIndex2 + step, 0),
+          currentMaqamList.length - 1
+        );
+        nextNote = cadence[currentIndex2];
+        attempts++;
+      } while (countNote(phrase2, nextNote) >= 2 && attempts < 10);
+
+      phrase2.push(nextNote);
+    }
+    console.log(phrase2);
+
+    // 3. Make sure at least one pivot is included
+    const hasPivot = phrase2.some((n) => pivots.includes(n));
+    if (!hasPivot && pivots.length > 0) {
+      phrase2[phrase2.length - 1] = pivots[0]; // نحط Pivot في الآخر
+    }
+
+    console.log("Generated phrase:", phrase2);
+    setRandomNotes(phrase2);
+    await playSequence(phrase2);
   };
 
   const repeatRandomNotes = async () => {

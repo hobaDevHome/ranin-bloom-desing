@@ -137,3 +137,15 @@ export const scalesListsForDictation = {
     // { name: "kurd_dict14", notes: ["re", "mi_b", "fa", "sol"] },
   ],
 };
+
+// Define pivot notes for each maqam
+export const maqamPivots: Record<string, string[]> = {
+  Saba: ["re", "la"],
+  Nahawand: ["do", "sol"],
+  Agam: ["do", "sol"],
+  Bayaty: ["re", "la"],
+  Kurd: ["re", "la"],
+  Sika: ["mi_q", "si_q"],
+  Hegaz: ["re", "la"],
+  Rast: ["do", "sol"],
+};
