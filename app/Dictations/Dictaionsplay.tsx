@@ -312,25 +312,25 @@ const DictaionsPlay = () => {
 
   const repeatRandomNotes = async () => {
     if (randomNotes.length > 0) {
-      await playTone(randomSound);
+      await playSequence(randomNotes);
     }
   };
 
   const revealCorrectSequence = async () => {
     const names = randomNotes.map((note) => getNoteDisplayName(note));
-    setCorrectNoteNames(names);
-    setShowCorrectNotes(true);
+    // setCorrectNoteNames(names);
+    // setShowCorrectNotes(true);
 
-    setTimeout(() => {
-      playTone(randomSound);
-      // revealTimeoutRef.current = null; // Clear ref after execution
-    }, 1000);
+    // setTimeout(() => {
+    //   playTone(randomSound);
+    //   // revealTimeoutRef.current = null; // Clear ref after execution
+    // }, 1000);
 
     // Play the correct sequence after 500ms
-    // revealTimeoutRef.current = setTimeout(() => {
-    //   playSequence(randomNotes);
-    //   revealTimeoutRef.current = null; // Clear ref after execution
-    // }, 500);
+    revealTimeoutRef.current = setTimeout(() => {
+      playSequence(randomNotes);
+      revealTimeoutRef.current = null; // Clear ref after execution
+    }, 2000);
   };
 
   const handleGuess = (guess: string) => {
