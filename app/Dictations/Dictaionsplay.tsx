@@ -10,6 +10,7 @@ import {
   dictationSoundFolders,
   Maqam,
   scalesNamesMap,
+  soundFolders,
 } from "@/constants/scales";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useSettings } from "@/context/SettingsContext";
@@ -131,7 +132,7 @@ const DictaionsPlay = () => {
   };
 
   //////////////// play tone function ///////////////////////
-  const playTone = async (note: string) => {
+  const playTone = async (note: string, folderType: number = 0) => {
     if (cancelled.current) return;
     if (soundRef.current) {
       try {
@@ -144,7 +145,12 @@ const DictaionsPlay = () => {
     }
 
     const soundName = note.toLowerCase();
-    const folder = dictationSoundFolders[state.instrument];
+
+    const folder =
+      folderType === 0
+        ? dictationSoundFolders[state.instrument]
+        : soundFolders[state.instrument];
+
     if (!folder) {
       console.error(`Instrument \"${state.instrument}\" not found.`);
       return;
@@ -178,7 +184,7 @@ const DictaionsPlay = () => {
     setIsPlaying(true);
     for (let i = 0; i < notesToPlay.length; i++) {
       if (cancelled.current) break;
-      await playTone(notesToPlay[i]);
+      await playTone(notesToPlay[i], 1);
       await new Promise((resolve) => setTimeout(resolve, 1200)); // Delay between notes
     }
     setIsPlaying(false);
@@ -206,42 +212,46 @@ const DictaionsPlay = () => {
 
     setRandomNotes(currentNotes);
     setRandomSound(currentSound);
+    //  play pre recorded sounds
+    // ====================================
     await playTone(currentSound);
-    console.log(currentSound);
-
-    const filteredCadence = cadence.filter(
-      (note) => note !== "rii_b" && note !== "rii"
-    );
-    const notes = [];
-    ////////////////////////////////////////////////
-    // totally random 4 notes
-    // for (let i = 0; i < 4; i++) {
-    //   const randomIndex = Math.floor(Math.random() * filteredCadence.length);
-    //   notes.push(filteredCadence[randomIndex]);
-    // }
-    // setRandomNotes(notes);
-    // await playSequence(notes);
 
     /////////////////////////////////////////////////////
     // get notes from pre recoreded sequence in dictaion list
+    console.log("cadence", cadence);
+    /////////////// another random sequence but around some pattern ///////////////
+    const startIndex = Math.floor(Math.random() * (cadence.length - 4));
+    let currentIndex = startIndex;
+    const phrase = [cadence[currentIndex]];
 
-    /////////////// another random sequence  but arround some pattern///////////////
-    // const startIndex = Math.floor(Math.random() * (filteredCadence.length - 4)); // عشان يفضل فيه نغمات حوالينها
-    // let currentIndex = startIndex;
-    // const phrase = [filteredCadence[currentIndex]];
+    // دالة تعد عدد مرات النغمة في الجملة
+    const countNote = (arr: string[], note: string): number =>
+      arr.filter((n) => n === note).length;
 
-    // for (let i = 1; i < 4; i++) {
-    //   // نتحرك خطوة واحدة يمين أو شمال
-    //   const step = Math.floor(Math.random() * 3) - 1; // -1 أو 0 أو +1
-    //   currentIndex = Math.min(
-    //     Math.max(currentIndex + step, 0),
-    //     filteredCadence.length - 1
-    //   ); // نتأكد إننا جوه حدود السلم
-    //   phrase.push(filteredCadence[currentIndex]);
-    // }
-    // console.log(phrase);
-    // setRandomNotes(phrase);
-    // await playSequence(phrase);
+    for (let i = 1; i < 4; i++) {
+      let nextNote;
+      let attempts = 0;
+
+      do {
+        const step = Math.floor(Math.random() * 3) - 1; // -1 أو 0 أو +1
+        currentIndex = Math.min(
+          Math.max(currentIndex + step, 0),
+          cadence.length - 1
+        );
+        nextNote = cadence[currentIndex];
+        attempts++;
+        // لو النغمة دي ظهرت بالفعل مرتين ⇒ نجرب تاني
+      } while (countNote(phrase, nextNote) >= 2 && attempts < 10);
+
+      phrase.push(nextNote);
+    }
+
+    // ========================================
+    // play sequence randomly generated
+    // نغمات عشواية من نغمات المقام بحيث لا تتكرر النغمة اكتر من مرتين ف الجملة وماتكونش المسافات بينهم اكتر من تون واحد
+    console.log(phrase);
+    setRandomNotes(phrase);
+    await playSequence(phrase);
   };
 
   const repeatRandomNotes = async () => {
