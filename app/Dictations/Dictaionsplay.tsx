@@ -318,8 +318,8 @@ const DictaionsPlay = () => {
 
   const revealCorrectSequence = async () => {
     const names = randomNotes.map((note) => getNoteDisplayName(note));
-    // setCorrectNoteNames(names);
-    // setShowCorrectNotes(true);
+    setCorrectNoteNames(names);
+    setShowCorrectNotes(true);
 
     // setTimeout(() => {
     //   playTone(randomSound);
