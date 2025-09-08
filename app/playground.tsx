@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Asset } from "expo-asset";
 import { Audio } from "expo-av";
@@ -80,17 +80,27 @@ const pianoLayout = [
 type PlaygroundScreenProps = {
   onKeyPress?: (note: string) => void;
   showIntro?: boolean;
+  initialQuarterToneToggles?: Record<string, boolean>;
 };
+
 const whiteKeysCount = pianoLayout.filter((key) => key.type === "white").length;
 
 const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({
   onKeyPress,
   showIntro = true,
+  initialQuarterToneToggles,
 }) => {
   const { state } = useSettings();
   const [quarterToneToggles, setQuarterToneToggles] = useState<
     Record<string, boolean>
   >({});
+
+  // داخل كومبوننت PlaygroundScreen:
+  useEffect(() => {
+    if (initialQuarterToneToggles) {
+      setQuarterToneToggles(initialQuarterToneToggles);
+    }
+  }, [initialQuarterToneToggles]);
 
   const [containerWidth, setContainerWidth] = useState(0);
 

@@ -21,10 +21,22 @@ import {
   maqamPivots,
 } from "../../constants/DictationLists";
 import PlaygroundScreen from "../playground";
+import tr from "@/locales/tr";
 
 type PlayScreenParams = {
   id: string;
   scale: string;
+};
+
+const maqamatQuarterTones = {
+  Saba: { mi: true },
+  Bayaty: { mi: true },
+  Sika: { mi: true, si: true },
+  Rast: { mi: true, si: true },
+  Nahawand: {},
+  Agam: {},
+  Hegaz: {},
+  Kurd: {},
 };
 
 const DictaionsPlay = () => {
@@ -474,7 +486,11 @@ const DictaionsPlay = () => {
 
       {/* pino component */}
 
-      <PlaygroundScreen onKeyPress={handlePianoKeyPress} showIntro={false} />
+      <PlaygroundScreen
+        onKeyPress={handlePianoKeyPress}
+        showIntro={false}
+        initialQuarterToneToggles={maqamatQuarterTones[selectedScale] || {}}
+      />
 
       {/* Buttons Area */}
 
