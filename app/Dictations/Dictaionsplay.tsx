@@ -136,13 +136,13 @@ const DictaionsPlay = () => {
     let currentKeyMap =
       tonesLables[state.toneLabel as keyof typeof tonesLables];
     if (state.language === "en") {
-      return currentKeyMap.hasOwnProperty(keyName2)
-        ? currentKeyMap[keyName2 as keyof typeof currentKeyMap]
-        : keyName2;
+      return currentKeyMap.hasOwnProperty(keyName1)
+        ? currentKeyMap[keyName1 as keyof typeof currentKeyMap]
+        : keyName1;
     } else {
-      return keysMap.hasOwnProperty(keyName2)
-        ? keysMap[keyName2 as keyof typeof keysMap]
-        : keyName2;
+      return keysMap.hasOwnProperty(keyName1)
+        ? keysMap[keyName1 as keyof typeof keysMap]
+        : keyName1;
     }
   };
 
@@ -330,6 +330,8 @@ const DictaionsPlay = () => {
 
   const revealCorrectSequence = async () => {
     const names = randomNotes.map((note) => getNoteDisplayName(note));
+    console.log("names: ", names);
+    console.log("randomNotes: ", randomNotes);
     setCorrectNoteNames(names);
     setShowCorrectNotes(true);
 

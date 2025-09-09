@@ -19,6 +19,15 @@ export const keysMap = {
   Si: "سي",
   Doo: "دو",
   Ree: "ري",
+  Re_b: "ري بيمول",
+  Mi_b: "مي بيمول",
+  Fa_d: "فا دييز",
+  Sol_b: "صول بيمول",
+  La_b: "لا بيمول",
+  Si_b: "سي بيمول",
+  Mi_q: "مي نصف بيمول",
+  Si_q: "سي نصف بيمول",
+  mii_q: "مي نصف بيمول",
 };
 export const tonesLables = {
   DoReMi: {
@@ -31,6 +40,15 @@ export const tonesLables = {
     Si: "Si",
     Doo: "Do",
     Ree: "Re",
+    Re_b: "Re♭",
+    Mi_b: "Mi♭",
+    Fa_d: "Fa♯",
+    Sol_b: "Sol♭",
+    La_b: "La♭",
+    Si_b: "Si♭",
+    Mi_q: "Mi˷",
+    Si_q: "Si˷",
+    mii_q: "Mi˷",
   },
   Numbers: {
     Do: "1",
