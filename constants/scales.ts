@@ -28,6 +28,7 @@ export const keysMap = {
   Mi_q: "مي نصف بيمول",
   Si_q: "سي نصف بيمول",
   mii_q: "مي نصف بيمول",
+  Ree_b: "ري بيمول",
 };
 export const tonesLables = {
   DoReMi: {
@@ -49,6 +50,7 @@ export const tonesLables = {
     Mi_q: "Mi˷",
     Si_q: "Si˷",
     mii_q: "Mi˷",
+    Ree_b: "Re♭",
   },
   Numbers: {
     Do: "1",
