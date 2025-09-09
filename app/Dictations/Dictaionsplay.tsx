@@ -57,6 +57,7 @@ const DictaionsPlay = () => {
 
   const [clickedItems, setClickedItems] = useState(0);
   const [clickedright, setClickedright] = useState(0);
+  const [showSikaDiscalimer, setShowSikaDiscalimer] = useState(false);
   const [score, setScore] = useState({ correct: 0, incorrect: 0 });
 
   const { state, dispatch } = useSettings();
@@ -218,6 +219,7 @@ const DictaionsPlay = () => {
     setCurrentNoteIndex(0);
     setClicksMade(0);
     setRandomNotes([]); // Clear previous notes first
+    setShowSikaDiscalimer(false);
 
     const currentMaqamList = scalesListsForDictation[selectedScale as Maqam];
     let selectedRandomSequence =
@@ -290,8 +292,6 @@ const DictaionsPlay = () => {
     }
     phrase2.push(cadence[currentIndex2]);
 
-    console.log(phrase2);
-
     // 2. Build the rest of the phrase
     for (let i = 1; i < 4; i++) {
       let nextNote: string;
@@ -309,7 +309,6 @@ const DictaionsPlay = () => {
 
       phrase2.push(nextNote);
     }
-    console.log(phrase2);
 
     // 3. Make sure at least one pivot is included
     const hasPivot = phrase2.some((n) => pivots.includes(n));
@@ -318,6 +317,8 @@ const DictaionsPlay = () => {
     }
 
     console.log("Generated phrase:", phrase2);
+    const hasQuarterTone = phrase2.some((note) => note.includes("q"));
+    if (hasQuarterTone) setShowSikaDiscalimer(true);
     setRandomNotes(phrase2);
     await playSequence(phrase2);
   };
@@ -484,7 +485,7 @@ const DictaionsPlay = () => {
                 {correctNoteNames.join(" - ")}
               </Text>
             </View>
-            {state.language !== "ar" && (
+            {state.language !== "ar" && showSikaDiscalimer && (
               <View style={styles.correctNotesContainer}>
                 <Text style={styles.correctNotesText}>
                   {state.labels.dictations.sikaDiscalimer}
