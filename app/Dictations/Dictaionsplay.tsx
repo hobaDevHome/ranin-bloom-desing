@@ -331,8 +331,7 @@ const DictaionsPlay = () => {
 
   const revealCorrectSequence = async () => {
     const names = randomNotes.map((note) => getNoteDisplayName(note));
-    console.log("names: ", names);
-    console.log("randomNotes: ", randomNotes);
+
     setCorrectNoteNames(names);
     setShowCorrectNotes(true);
 
@@ -342,10 +341,10 @@ const DictaionsPlay = () => {
     // }, 1000);
 
     // Play the correct sequence after 500ms
-    revealTimeoutRef.current = setTimeout(() => {
-      playSequence(randomNotes);
-      revealTimeoutRef.current = null; // Clear ref after execution
-    }, 2000);
+    // revealTimeoutRef.current = setTimeout(() => {
+    //   playSequence(randomNotes);
+    //   revealTimeoutRef.current = null; // Clear ref after execution
+    // }, 2000);
   };
 
   const handleGuess = (guess: string) => {
