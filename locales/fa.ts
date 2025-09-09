@@ -221,6 +221,7 @@ export default {
     play: "اجرا",
     correctSequence: "ترتیب صحیح ",
     intro: "انتخاب کنید که قسمتی از مقام را تمرین کنید.",
+    sikaDiscalimer: "˷ : نت را ربع پرده پایین می‌آورد",
   },
   playGroundPage: {
     express: "خودت را بیان کن",

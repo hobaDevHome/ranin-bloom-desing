@@ -230,6 +230,7 @@ export default {
     play: "Çal",
     correctSequence: "Doğru Sıralama ",
     intro: "Hangi bölümü dikkate almak istiyorsunuz?",
+    sikaDiscalimer: "˷ : sesi çeyrek ton düşürür",
   },
   playGroundPage: {
     express: "Kendini ifade et",

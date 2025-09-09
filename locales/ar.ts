@@ -231,6 +231,7 @@ export default {
     play: "تدريب",
     correctSequence: "النغمات الصحيحة هي",
     intro: "حدد المقام المطلوب",
+    sikaDiscalimer: "˷ يعني : تنزع باربعة نغمة",
   },
 
   playGroundPage: {

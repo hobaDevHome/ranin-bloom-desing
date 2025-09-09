@@ -236,5 +236,6 @@ export default {
     play: "Play",
     correctSequence: "Correct Sequence ",
     intro: "Select which part of Maqam you want to be tested on.",
+    sikaDiscalimer: "˷  : means lowers by quarter tone",
   },
 };

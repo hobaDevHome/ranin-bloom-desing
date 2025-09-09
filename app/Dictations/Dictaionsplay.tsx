@@ -477,12 +477,21 @@ const DictaionsPlay = () => {
           ))}
         </View>
         {showCorrectNotes && (
-          <View style={styles.correctNotesContainer}>
-            <Text style={styles.correctNotesText}>
-              {state.labels.dictations.correctSequence} :{" "}
-              {correctNoteNames.join(" - ")}
-            </Text>
-          </View>
+          <>
+            <View style={styles.correctNotesContainer}>
+              <Text style={styles.correctNotesText}>
+                {state.labels.dictations.correctSequence} :{" "}
+                {correctNoteNames.join(" - ")}
+              </Text>
+            </View>
+            {state.language !== "ar" && (
+              <View style={styles.correctNotesContainer}>
+                <Text style={styles.correctNotesText}>
+                  {state.labels.dictations.sikaDiscalimer}
+                </Text>
+              </View>
+            )}
+          </>
         )}
       </View>
 
