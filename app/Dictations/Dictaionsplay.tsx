@@ -116,6 +116,13 @@ const DictaionsPlay = () => {
 
     return unsubscribe;
   }, [navigation, currentSoundObject]);
+  useEffect(() => {
+    if (showCorrectNotes && randomNotes.length > 0) {
+      // إعادة حساب أسماء النغمات وفق اللغة الحالية
+      const names = randomNotes.map((note) => getNoteDisplayName(note));
+      setCorrectNoteNames(names);
+    }
+  }, [state.language]);
 
   const levelLabels = state.labels.introGamePage.levelPage;
   const cadence = scalesLists[selectedScale as Maqam];
