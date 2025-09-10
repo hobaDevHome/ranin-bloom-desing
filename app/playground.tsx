@@ -8,28 +8,59 @@ import { Ionicons } from "@expo/vector-icons";
 
 // Define the piano layout with toggle info for keys that support quarter tones
 const pianoLayout = [
-  { note: "do", type: "white", label: "Do", hasToggle: true, toggleKey: "do" },
+  {
+    note: "do",
+    type: "white",
+    label: "Do",
+    labelAr: "دو",
+    hasToggle: true,
+    toggleKey: "do",
+  },
   {
     note: "do_d",
     type: "black",
     label: "Do#",
+    labelAr: "دو#",
     hasToggle: true,
     toggleKey: "do_d",
   },
-  { note: "re", type: "white", label: "Re", hasToggle: true, toggleKey: "re" },
+  {
+    note: "re",
+    type: "white",
+    label: "Re",
+    labelAr: "ري",
+    hasToggle: true,
+    toggleKey: "re",
+  },
   {
     note: "mi_b",
     type: "black",
     label: "Mi♭",
+    labelAr: "مي♭",
     hasToggle: true,
     toggleKey: "mi_b",
   },
-  { note: "mi", type: "white", label: "Mi", hasToggle: true, toggleKey: "mi" },
-  { note: "fa", type: "white", label: "Fa", hasToggle: true, toggleKey: "fa" },
+  {
+    note: "mi",
+    type: "white",
+    label: "Mi",
+    labelAr: "مي",
+    hasToggle: true,
+    toggleKey: "mi",
+  },
+  {
+    note: "fa",
+    type: "white",
+    label: "Fa",
+    labelAr: "فا",
+    hasToggle: true,
+    toggleKey: "fa",
+  },
   {
     note: "fa_d",
     type: "black",
     label: "Fa#",
+    labelAr: "فا#",
     hasToggle: true,
     toggleKey: "fa_d",
   },
@@ -37,6 +68,7 @@ const pianoLayout = [
     note: "sol",
     type: "white",
     label: "Sol",
+    labelAr: "صول",
     hasToggle: true,
     toggleKey: "sol",
   },
@@ -44,22 +76,39 @@ const pianoLayout = [
     note: "la_b",
     type: "black",
     label: "La♭",
+    labelAr: "لا♭",
     hasToggle: true,
     toggleKey: "la_b",
   },
-  { note: "la", type: "white", label: "La", hasToggle: true, toggleKey: "la" },
+  {
+    note: "la",
+    type: "white",
+    label: "La",
+    labelAr: "لا",
+    hasToggle: true,
+    toggleKey: "la",
+  },
   {
     note: "si_b",
     type: "black",
     label: "Si♭",
+    labelAr: "سي♭",
     hasToggle: true,
     toggleKey: "si_b",
   },
-  { note: "si", type: "white", label: "Si", hasToggle: true, toggleKey: "si" },
+  {
+    note: "si",
+    type: "white",
+    label: "Si",
+    labelAr: "سي",
+    hasToggle: true,
+    toggleKey: "si",
+  },
   {
     note: "doo",
     type: "white",
     label: "Do",
+    labelAr: "دو",
     hasToggle: true,
     toggleKey: "doo",
   }, // Higher octave Do
@@ -67,6 +116,7 @@ const pianoLayout = [
     note: "ree_b",
     type: "black",
     label: "Re♭",
+    labelAr: "ري♭",
     // hasToggle: true,
     // toggleKey: "ree_b",
   }, // Higher octave Re flat
@@ -74,9 +124,10 @@ const pianoLayout = [
     note: "ree",
     type: "white",
     label: "Re",
+    labelAr: "ري",
   }, // Higher octave Re
-  // Add more notes with toggles as needed
 ];
+
 type PlaygroundScreenProps = {
   onKeyPress?: (note: string) => void;
   showIntro?: boolean;
@@ -324,7 +375,7 @@ const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({
                           { fontSize: whiteKeyWidth * 0.3 },
                         ]}
                       >
-                        {key.label}
+                        {state.language === "ar" ? key.labelAr : key.label}
                       </Text>
                     </TouchableOpacity>
                   );
@@ -373,7 +424,7 @@ const PlaygroundScreen: React.FC<PlaygroundScreenProps> = ({
                           { fontSize: blackKeyWidth * 0.3 },
                         ]}
                       >
-                        {key.label}
+                        {state.language === "ar" ? key.labelAr : key.label}
                       </Text>
                     </TouchableOpacity>
                   );
